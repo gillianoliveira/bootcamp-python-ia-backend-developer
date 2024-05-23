@@ -39,8 +39,7 @@ Criar um sistema bancário com as operações a seguir:
 
 ### Operação de Depósito
 
-[✓] A versão 1 do projeto trabalha com 1 único usuário, dessa forma não é necessário o número da agência e conta bancária. <br />
-<br />
+[✓] A versão 1 do projeto trabalha com 1 único usuário, dessa forma não é necessário o número da agência e conta bancária. <br /><br />
 [✓] Não podem haver depósitos negativos.
 
 ### Operação de Saque
