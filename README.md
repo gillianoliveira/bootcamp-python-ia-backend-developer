@@ -34,3 +34,7 @@ Faça um [fork](https://docs.github.com/pt/pull-requests/collaborating-with-pull
 Faça o [download](https://docs.github.com/pt/repositories/working-with-files/using-files/downloading-source-code-archives) do repositório.
 
 # Atividades Propostas
+
+| #  | Módulo                                     | Atividade                             | Collab      |  Conclusão     |
+|--  |--                                          |--                                     |--           |--              |
+| M2 |Dominando Python e suas Estruturas de Dados | Criando um Sistema Bancário com Python| Aguardando  | 23-05-2024     |
