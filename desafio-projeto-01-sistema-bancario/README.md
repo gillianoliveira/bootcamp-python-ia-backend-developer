@@ -61,7 +61,7 @@ OBS: A primeira solução ficou parecida com a do repositório oficial do curso 
 
 ## Algoritmo de depósito
 1 Pedir que o cliente informe o valor a ser depositado. <br />
-2 Verificar se o valor do depósito é um número positivo. br />
+2 Verificar se o valor do depósito é um número positivo. <br />
 3 Realizar a operação de crédito adicionando o valor ao saldo. <br />
 4 Gravar a operação no extrato. <br />
 5 Oferecer novas opções. <br />
