@@ -17,8 +17,8 @@ SUMÁRIO:
     - [Operação de Saque](#operação-de-saque)
     - [Operação Extrato](#operação-extrato)
 - [Algoritmos criados por operação](#algoritmos-criados-por-operação)
-  - [Algoritmo de saque](#algoritmo-de-saque)
   - [Algoritmo de depósito](#algoritmo-de-depósito)
+  - [Algoritmo de saque](#algoritmo-de-saque)
 - [Repositório oficial](#repositório-oficial)
 - [Mensagem](#mensagem)
 - [Principais tópicos abordados até o momento](#principais-tópicos-abordados-até-o-momento)
@@ -59,6 +59,13 @@ OBS: A primeira solução ficou parecida com a do repositório oficial do curso 
 
 # Algoritmos criados por operação
 
+## Algoritmo de depósito
+1 Pedir que o cliente informe o valor a ser depositado. <br />
+2 Verificar se o valor do depósito é um número positivo. br />
+3 Realizar a operação de crédito adicionando o valor ao saldo. <br />
+4 Gravar a operação no extrato. <br />
+5 Oferecer novas opções. <br />
+
 ## Algoritmo de saque
 1 Verificar se a opção selecionada foi 1 no menu principal <br />
 2 Pedir que o cliente informe o valor que deseja sacar. <br />
@@ -68,13 +75,6 @@ OBS: A primeira solução ficou parecida com a do repositório oficial do curso 
 6 Realizar a operação de saque <br />
 7 Gravar a operação no extrato <br />
 8 Oferecer novas opções <br />
-
-## Algoritmo de depósito
-1 Pedir que o cliente informe o valor a ser depositado. <br />
-2 Verificar se o valor do depósito é um número positivo. br />
-3 Realizar a operação de crédito adicionando o valor ao saldo. <br />
-4 Gravar a operação no extrato. <br />
-5 Oferecer novas opções. <br />
 
 # Repositório oficial
 O repositório oficial com a solução proposta pelo instrutor Guilherme Arthur de Carvalho (@decarvalhogui) pode ser acessado através do endereço a seguir: [https://github.com/digitalinnovationone/trilha-python-dio/blob/main/00%20-%20Fundamentos/desafio.py](https://github.com/digitalinnovationone/trilha-python-dio/blob/main/00%20-%20Fundamentos/desafio.py)
