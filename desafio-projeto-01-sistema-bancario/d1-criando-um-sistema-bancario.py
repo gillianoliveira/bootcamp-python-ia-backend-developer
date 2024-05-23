@@ -53,19 +53,24 @@ Opção escolhida: '''))
     elif opcao == 3:
         total_depositos = 0.0
         total_saques = 0.0
-        print("Extrato")                
-        for operacao in extrato:
-            print(f"{operacao['data']} => R$ {operacao['valor']:.2f} - {operacao['operacao']}")
-            
-            if operacao['operacao'] == 'Depósito':
-                total_depositos += operacao['valor']
-            elif operacao['operacao'] == 'Saque':
-                total_saques += operacao['valor']
+        print("Extrato") 
+        total_transacoes = len(extrato)
         
-        print('-' * 30)
-        print(f'Total de depósitos: R$ {total_depositos:.2f}')
-        print(f'Total de saques: R$ {total_saques:.2f}')
-        print(f'Saldo: R$ {saldo:.2f}')
+        if total_transacoes > 1:
+            for operacao in extrato:
+                print(f"{operacao['data']} => R$ {operacao['valor']:.2f} - {operacao['operacao']}")
+                
+                if operacao['operacao'] == 'Depósito':
+                    total_depositos += operacao['valor']
+                elif operacao['operacao'] == 'Saque':
+                    total_saques += operacao['valor']        
+        
+            print('-' * 30)
+            print(f'Total de depósitos: R$ {total_depositos:.2f}')
+            print(f'Total de saques: R$ {total_saques:.2f}')
+            print(f'Saldo: R$ {saldo:.2f}')
+        else:
+            print('Não foram realizadas movimentações.')   
             
     elif opcao == 4:
         print("Progama encerrado.")
