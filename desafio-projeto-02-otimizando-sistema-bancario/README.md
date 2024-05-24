@@ -15,6 +15,7 @@ SUMÁRIO:
 - [Requisitos](#requisitos)
 - [Regras de Negócios](#regras-de-negócios)
 - [Algoritmos](#algoritmos)
+  - [Cadastro de clientes](#cadastro-de-clientes)
 - [Principais tópicos abordades até o momento em Python](#principais-tópicos-abordades-até-o-momento-em-python)
 
 
@@ -45,6 +46,14 @@ Recriar o código do projeto 'Criando um Sistema Bancário em Python', desafio 1
 # Algoritmos
 
 Em andamento...
+
+## Cadastro de clientes
+1. Solicitar o CPF.
+2. Verificar a quantidade de dígitos do cpf.
+3. Verificar se o CPF já está cadastrado.
+4. Se o CPF estiver cadastrado, exibir mensagem informado que o cadastro já existe.
+5. Se o CPF não estiver cadastrado, solicitar dados para o cadastro
+6. Armazenar os dados fornecidos pelo cliente
 
 # Principais tópicos abordades até o momento em Python
 
