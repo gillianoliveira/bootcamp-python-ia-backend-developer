@@ -7,6 +7,7 @@ Inscrição: 13-05-2024
 Término: em andamento
 Carga horária: 67h
 Promovido por: Vivo
+Veja no Collab: [https://colab.research.google.com/drive/1GbHW4FnGeP50taYokh9kX9vJmryiBmtw?usp=sharing](https://colab.research.google.com/drive/1GbHW4FnGeP50taYokh9kX9vJmryiBmtw?usp=sharing)
 ```
 
 SUMÁRIO:

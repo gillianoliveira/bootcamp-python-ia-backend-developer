@@ -23,7 +23,7 @@ Este repositório foi criado guardar as respostas das atividades propostas ao lo
 Os scripts desde repositório foram desenvolvidos na IDE [VSCode](https://code.visualstudio.com/updates/v1_89) atualizado até abril de 2024 v.1.89.1 e [Python](https://www.python.org/downloads/) v.3.10.4. Ao rodar os scripts na sua máquina é recomendável que utilize uma versão igual do python ou superior porque pretendo utilizar as novas features da linguagem. Para utilizar este repositório, você tem algumas opções:
 
 **Opção 1**:
-Você pode utilizar a demo online que eu vou disponibilizar na tabela de atividades mais adiante. Essa opção não requer nenhum tipo de instalação e você pode interagir com o código utilizando o Google Collab.
+Você pode utilizar a demo online que eu vou disponibilizar na tabela de atividades mais adiante. Essa opção não requer nenhum tipo de instalação e você pode interagir com o código utilizando o Google Collab. Basta efetuar o login em uma conta Google e acessar o link clicando sobre o ícone do Collaboratory na tabela abaixo.
 
 **Opção 2**: Copiar o script do programa, criar um novo arquivo .py na sua IDE e colar o script e executar. Você precisa ter o Python instalado na máquina para fazer esse procedimento.
 
@@ -35,9 +35,9 @@ Faça o [download](https://docs.github.com/pt/repositories/working-with-files/us
 
 # Atividades Propostas
 
-| #  | Módulo                                     | Atividade                                         | Tipo                         | Collab         |  Conclusão     |
-|--  |--                                          |--                                                 |--                            |--              |---             | 
-| M2 |Dominando Python e suas Estruturas de Dados | Criando um Sistema Bancário com Python            | Desafio de Projeto           |                |Em andamento    |
-| M2 |Dominando Python e suas Estruturas de Dados | Otimizando o Sistema Bancário com Funções em Python| Desafio de Projeto           |                |Em andamento    |
-| M2 |Dominando Python e suas Estruturas de Dados | Verificador de Planos de Internet                 | Desafio de Código            |                |Em andamento    |
-| M2 |Dominando Python e suas Estruturas de Dados |                                                   | Desafio de Código            |                |Em andamento    |
+| #  | Módulo                                     | Atividade                                          | Tipo                   |  Conclusão     | Collaboratory |               
+|--  |--                                          |--                                                  |--                      |--              |--             | 
+| M2 |Dominando Python e suas Estruturas de Dados | Criando um Sistema Bancário com Python             | Desafio de Projeto     |Publicado       |[![](/img/collab-icon.png)](https://colab.research.google.com/drive/1GbHW4FnGeP50taYokh9kX9vJmryiBmtw?usp=sharing)               |
+| M2 |Dominando Python e suas Estruturas de Dados | Otimizando o Sistema Bancário com Funções em Python| Desafio de Projeto     |Em andamento    |               |
+| M2 |Dominando Python e suas Estruturas de Dados | Verificador de Planos de Internet                  | Desafio de Código      |Em andamento    |               |
+| M2 |Dominando Python e suas Estruturas de Dados |                                                    | Desafio de Código      |Em andamento    |               |
