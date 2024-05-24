@@ -17,7 +17,7 @@ SUMÁRIO:
 
 
 # Sobre
-Este repositório foi criado guardar as respostas das atividades propostas ao longo do bootcamp Python AI Backend Developer promovido pela [DIO](https://dio.me/) em parceria com a [Vivo](https://vivo.com.br/). Cada pasta corresponde a uma atividade específica. Os arquivos com códigos em Python poderão ter uma versão online disponibilizada no Google Collab com conteúdo idêntico ao contido neste repositório para que o visitante possa interagir com o cógigo online.
+Este repositório foi criado guardar as respostas das atividades propostas ao longo do bootcamp Python AI Backend Developer promovido pela [DIO](https://dio.me/) em parceria com a [Vivo](https://vivo.com.br/). Cada pasta corresponde a uma atividade específica. Os arquivos com códigos em Python poderão ter uma versão online disponibilizada no Google Collab com conteúdo idêntico ao contido neste repositório para que o visitante possa interagir com o código online.
 
 # Como utilizar este repositório
 Os scripts desde repositório foram desenvolvidos na IDE [VSCode](https://code.visualstudio.com/updates/v1_89) atualizado até abril de 2024 v.1.89.1 e [Python](https://www.python.org/downloads/) v.3.10.4. Ao rodar os scripts na sua máquina é recomendável que utilize uma versão igual do python ou superior porque pretendo utilizar as novas features da linguagem. Para utilizar este repositório, você tem algumas opções:
