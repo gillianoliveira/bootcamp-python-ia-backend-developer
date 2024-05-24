@@ -38,6 +38,6 @@ Faça o [download](https://docs.github.com/pt/repositories/working-with-files/us
 | #  | Módulo                                     | Atividade                                          | Tipo                   |  Conclusão     | Collaboratory |               
 |--  |--                                          |--                                                  |--                      |--              |--             | 
 | M2 |Dominando Python e suas Estruturas de Dados | Criando um Sistema Bancário com Python             | Desafio de Projeto     |Publicado       |[![](/img/collab-icon.png)](https://colab.research.google.com/drive/1GbHW4FnGeP50taYokh9kX9vJmryiBmtw?usp=sharing)               |
-| M2 |Dominando Python e suas Estruturas de Dados | Otimizando o Sistema Bancário com Funções em Python| Desafio de Projeto     |Em andamento    |               |
-| M2 |Dominando Python e suas Estruturas de Dados | Verificador de Planos de Internet                  | Desafio de Código      |Em andamento    |               |
-| M2 |Dominando Python e suas Estruturas de Dados |                                                    | Desafio de Código      |Em andamento    |               |
+| M2 |Dominando Python e suas Estruturas de Dados | Otimizando o Sistema Bancário com Funções em Python| Desafio de Projeto     |Em desenvolvimento |               |
+| M2 |Dominando Python e suas Estruturas de Dados | Verificador de Planos de Internet                  | Desafio de Código      |Aguardando         |               |
+| M2 |Dominando Python e suas Estruturas de Dados |                                                    | Desafio de Código      |Aguardando         |               |
