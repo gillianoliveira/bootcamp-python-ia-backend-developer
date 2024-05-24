@@ -16,6 +16,7 @@ SUMÁRIO:
 - [Regras de Negócios](#regras-de-negócios)
 - [Algoritmos](#algoritmos)
   - [Cadastro de clientes](#cadastro-de-clientes)
+  - [Criação de nova conta](#criação-de-nova-conta)
 - [Principais tópicos abordades até o momento em Python](#principais-tópicos-abordades-até-o-momento-em-python)
 
 
@@ -54,6 +55,12 @@ Em andamento...
 4. Se o CPF estiver cadastrado, exibir mensagem informado que o cadastro já existe.
 5. Se o CPF não estiver cadastrado, solicitar dados para o cadastro
 6. Armazenar os dados fornecidos pelo cliente
+
+## Criação de nova conta
+1. Solicita o CPF do titular da conta.
+2. Verifica se o CPF já está cadastrado.
+3. Se o CPF não estiver cadastrado, informa e volta para o menu principal.
+4. Se o CPF estiver cadastrado, abre uma nova conta.
 
 # Principais tópicos abordades até o momento em Python
 
