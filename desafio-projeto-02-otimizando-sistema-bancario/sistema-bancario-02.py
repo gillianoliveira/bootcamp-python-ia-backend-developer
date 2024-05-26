@@ -7,17 +7,61 @@ Conclusão do Desafio: ?
 Proposta no README
 '''
 
-import datetime
+import datetime as dt
 
-# Função consmética para gerar o título de cada seção
+# Funções complementares
 def titulo(t):
     traco = '-'
     print(traco * 30)
     print(f"{t.center(30, ' ')}")
     print(traco * 30)
 
-def depositar():
+def validacao_cpf(cpf):
+    global cpf_cadastrado    
+    if len(str(cpf)) != 11:
+        print('O cpf deve ter 11 dígitos.')
+        menu()
+        return
+    else:
+        for cliente in clientes:
+            if cliente["cpf"] == cpf:
+                cpf_cadastrado = True
+                return cpf
+
+def listar_clientes(clientes):
+    for cliente in clientes:
+        print(cliente)
+
+def listar_contas(contas):
+    for conta in contas:
+        print(conta) 
+
+# Funções Principais 
+def depositar(contas, valor):
+    global saldo
+    global soma_depositos    
     titulo('Depósito')
+    
+    numero_conta = int(input('Informe o número da conta: '))
+    
+    conta_encontrada = False
+
+    for conta in contas:
+        if conta['numero_conta'] == numero_conta:
+            conta_encontrada = True
+            valor = float(input('Valor do depósito: R$ '))
+            if valor > 0:
+                saldo += valor
+                data = dt.datetime.now().strftime("%Y-%m-%d %I:%M:%S") 
+                soma_depositos.append(valor)
+                extrato.append({'data':data, 'valor':valor, 'operacao':'Depósito'})
+                print(f'Deósito no valor de R$ {valor:.2f} na conta {numero_conta} realizado com sucesso.')
+            elif valor == 0:
+                print(f'O valor do depósito precisa ser maior que R$ 0.00.')
+                menu()
+                break
+    if not conta_encontrada:
+        print(f'A conta número {numero_conta} não foi encontrada. Depósito não realizado.')
 
 def sacar():
     titulo('Saque')
@@ -26,39 +70,30 @@ def visualizar_extrato():
     titulo('Extrato')
 
 def cadastrar_cliente():
-    titulo('Cadastro de Clientes')
-    global clientes
+    titulo('Cadastrar Cliente')
+    
     while True:
-        # Solicitar o cpf
         cpf = int(input("CPF: "))
-        
-        # Verificar a quantidade de dígitos do cpf
-        if len(str(cpf)) != 11:
-            print('O CPF deve ter 11 dígitos. ')
-            menu()
-            return
-        
-        # Verificar se o cpf já está cadastrado
-        for cliente in clientes:
-            if cliente["cpf"] == cpf:
-                print('Cliente já cadastrado.')
-                menu()
-                return
-        
-        nome = input('Nome completo: ')
-        data_nascimento = input('Data de nascimento(dd/mm/yyyy): ')
+        validacao_cpf(cpf)
+        nome = input('Nome Completo: ')
+        data_nascimento = input('Data de nascimento (dd/mm/aaaa): ')
         logradouro = input('Logradouro: ')
         numero = input('Número: ')
         bairro = input('Bairro: ')
         cidade = input('Cidade: ')
-        estado = input('Sigla do estado: ').capitalize()   
-        # Armazenar os dados do cliente
-        clientes.append({"cpf": cpf, "nome": nome, "data_nascimento": data_nascimento, "logradouro": logradouro, "numero":numero, "bairro": bairro, "cidade":cidade, "estado":estado})
-        print('Cliente cadastrado com sucesso.')
+        estado = input('Sigla do estado: ').upper()
+        endereco = f'{logradouro}, {numero}-{bairro}-{cidade}/{estado}'
+        cliente = {
+            'cpf': cpf, 
+            'nome': nome,
+            'data_nascimento': data_nascimento,
+            'endereco': endereco
+            }
+        clientes.append(cliente)        
         menu()
-        return
+        break
     
-def criar_conta():
+def abrir_conta():
     titulo('Nova Conta')
     global clientes
     global contas   
@@ -82,12 +117,8 @@ def criar_conta():
         menu()
         return
    
-def listar_contas():
-    titulo('Listar Contas')
-    for conta in contas:
-        print(conta)
 
-def listar_clientes():
+
     titulo('Listar Clientes')
 
 def sair():
@@ -96,70 +127,49 @@ def sair():
 
 def menu():
     titulo('Menu')
-    opcao_menu = int(input('''
+    opcao = int(input('''
     [1] Depositar
     [2] Sacar
-    [3] Visualizar Extrato
-    [4] Administrativo
-    [5] Sair
+    [3] Extrato
+    [4] Cadastrar Cliente
+    [5] Abertura de Conta
+    [6] Sair
     Opção escolhida: '''))
     
-    match opcao_menu:
+    match opcao:
         case 1:
-            depositar()
+            depositar(contas, valor)
         case 2:
             sacar()
         case 3:
             visualizar_extrato()
         case 4:
-            menu_admin()
+            cadastrar_cliente(clientes)
         case 5:
-            print("Sair")
-        case _:
-            print('Opção inválida')
-
-def menu_admin():
-    titulo('Administrativo')
-    opcao_menu = int(input('''
-    [1] Cadastrar Cliente
-    [2] Listar Clientes
-    [3] Criar Conta
-    [4] Listar Contas
-    [5] Menu anterior
-    [6] Sair    
-    Opção escolhida: '''))
-    
-    match opcao_menu:
-        case 1:
-            cadastrar_cliente()
-        case 2:
-            listar_clientes()
-        case 3:
-            criar_conta()
-        case 4:
-            listar_contas()
-        case 5:
-            menu()
+            abrir_conta(AGENCIA)
         case 6:
-            sair()
+            titulo('Sair')
+            print('Programa encerrado.')
+            exit()
         case _:
             print('Opção inválida.')
-            sair()   
+            exit()
 
 
 
 # Variáveis Globais
 NUM_SAQUES = 3
 LIMITE_SAQUES = 500.00
-
-
-clientes = []
-numero_conta = 0
+AGENCIA = '0001'
 contas = []
-numero_conta = 0
-lista_depositos = []
+clientes = []
+extrato = []
+soma_depositos = []
 saldo = 0.0
-extrato = []  # depositar()
+valor = 0.0
+numero_conta = 0
+cpf_cadastrado = False
+conta_cadastrada = False
 
 # Entrada do Programa
 # Chamando a função principal menu que chama as demais
