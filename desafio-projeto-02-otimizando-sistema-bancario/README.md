@@ -30,9 +30,9 @@ Recriar o código do projeto 'Criando um Sistema Bancário em Python', desafio 1
 [✓] Um usuário é composto por: nome, data de nascimento, cpf e endereço. <br />
 [✓] Uma conta é composta por: agência, número da conta e usuário. <br />
 [✓] O programa deve armazenar contas em uma lista. <br />
-[ ] O número da conta é sequencial, iniciando em 1. <br />
+[✓] O número da conta é sequencial, iniciando em 1. <br />
 [✓] O número da agência é fixo: "0001". <br />
-[ ] Endereço é uma string com formato: logradouro, número - bairro - cidade/ sigla do estado. <br />
+[✓] Endereço é uma string com formato: logradouro, número - bairro - cidade/ sigla do estado. <br />
 [✓] O CPF deve ser armazenado apenas com números. <br />
 [ ] A função saque deve receber argumentos apenas pelo nome (keyword only). Sugestão de argumentos: saldo, valor, extrato, limite, numero_saques, limite_sques. Sugestão de retorno: saldo e extrato <br />
 [ ] A função depósito deve receber os argumentos apenas por posição (positional only). Sugestão de argumentos:  saldo, valor, extrato. Sugestão de retorno: saldo e extrato. <br />
