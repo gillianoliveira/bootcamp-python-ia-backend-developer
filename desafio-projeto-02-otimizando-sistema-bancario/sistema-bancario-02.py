@@ -17,13 +17,13 @@ def titulo(t):
     print(traco * 30)
 
 def depositar():
-    pass
+    titulo('Depósito')
 
 def sacar():
-    pass
+    titulo('Saque')
 
 def visualizar_extrato():
-    pass
+    titulo('Extrato')
 
 def cadastrar_cliente():
     titulo('Cadastro de Clientes')
@@ -50,9 +50,8 @@ def cadastrar_cliente():
         logradouro = input('Logradouro: ')
         numero = input('Número: ')
         bairro = input('Bairro: ')
-        cidade = input('Cidade: ') 
-        estado = input('Sigla do estado: ').capitalize()     
-             
+        cidade = input('Cidade: ')
+        estado = input('Sigla do estado: ').capitalize()   
         # Armazenar os dados do cliente
         clientes.append({"cpf": cpf, "nome": nome, "data_nascimento": data_nascimento, "logradouro": logradouro, "numero":numero, "bairro": bairro, "cidade":cidade, "estado":estado})
         print('Cliente cadastrado com sucesso.')
@@ -60,11 +59,11 @@ def cadastrar_cliente():
         return
     
 def criar_conta():
+    titulo('Nova Conta')
     global clientes
     global contas   
-    numero_conta = 0
+    global numero_conta
     AGENCIA = '0001'
-    TIPO_CONTA = 'conta-corrente'
     
     cpf_titular = int(input('CPF do Titular: '))  # Informe o cpf do titular 
     
@@ -73,8 +72,9 @@ def criar_conta():
         if cliente['cpf'] == cpf_titular:
             titular_cadastrado = True
             numero_conta += 1
-            conta = {'cpf_titular':cpf_titular, 'tipo_conta': TIPO_CONTA,'agencia':AGENCIA,'numero_conta':numero_conta}
+            conta = {'cpf_titular':cpf_titular,'agencia':AGENCIA,'numero_conta':numero_conta}
             contas.append(conta)
+            print('Conta cadastrada com sucesso!')
             menu()
             break
     if not titular_cadastrado:
@@ -82,18 +82,18 @@ def criar_conta():
         menu()
         return
    
-  
 def listar_contas():
-    pass
+    titulo('Listar Contas')
+    for conta in contas:
+        print(conta)
 
 def listar_clientes():
-    pass
+    titulo('Listar Clientes')
 
 def sair():
     print('Programa encerrado.')
     exit()
 
-# Função principal que chama todas as outras
 def menu():
     titulo('Menu')
     opcao_menu = int(input('''
@@ -144,16 +144,24 @@ def menu_admin():
             sair()
         case _:
             print('Opção inválida.')
-            sair()    
-    
-    
+            sair()   
+
+
 
 # Variáveis Globais
+NUM_SAQUES = 3
+LIMITE_SAQUES = 500.00
+
+
 clientes = []
 numero_conta = 0
 contas = []
+numero_conta = 0
+lista_depositos = []
+saldo = 0.0
+extrato = []  # depositar()
 
 # Entrada do Programa
-# Chamando a função menu que chama as demais
+# Chamando a função principal menu que chama as demais
 menu()
 
