@@ -18,6 +18,7 @@ SUMÁRIO:
   - [Cadastro de clientes](#cadastro-de-clientes)
   - [Criação de nova conta](#criação-de-nova-conta)
   - [Depósito](#depósito)
+  - [Saque](#saque)
 - [Principais tópicos abordades até o momento em Python](#principais-tópicos-abordades-até-o-momento-em-python)
 
 
@@ -25,7 +26,7 @@ SUMÁRIO:
 Recriar o código do projeto 'Criando um Sistema Bancário em Python', desafio 1, utilizando funções para executar as features saque, depósito e visualizar extrato, além de criar duas novas funções sendo uma para cadastro de clientes e outra para cadatro de conta bancária. <br />
 
 # Requisitos
-[ ] Recriar as features: saque, depósito e visualizar extrado utilizando funções. <br />
+[✓] Recriar as features: saque, depósito e visualizar extrado utilizando funções. <br />
 [✓] Criar uma funcionalidade para cadastrar novos usuários. <br />
 [✓] Criar uma funcionalidade criar conta-corrente. <br />
 [✓] Um usuário é composto por: nome, data de nascimento, cpf e endereço. <br />
@@ -35,8 +36,8 @@ Recriar o código do projeto 'Criando um Sistema Bancário em Python', desafio 1
 [✓] O número da agência é fixo: "0001". <br />
 [✓] Endereço é uma string com formato: logradouro, número - bairro - cidade/ sigla do estado. <br />
 [✓] O CPF deve ser armazenado apenas com números. <br />
-[ ] A função saque deve receber argumentos apenas pelo nome (keyword only). Sugestão de argumentos: saldo, valor, extrato, limite, numero_saques, limite_sques. Sugestão de retorno: saldo e extrato <br />
-[ ] A função depósito deve receber os argumentos apenas por posição (positional only). Sugestão de argumentos:  saldo, valor, extrato. Sugestão de retorno: saldo e extrato. <br />
+[✓] A função saque deve receber argumentos apenas pelo nome (keyword only). Sugestão de argumentos: saldo, valor, extrato, limite, numero_saques, limite_sques. Sugestão de retorno: saldo e extrato <br />
+[✓] A função depósito deve receber os argumentos apenas por posição (positional only). Sugestão de argumentos:  saldo, valor, extrato. Sugestão de retorno: saldo e extrato. <br />
 
 
 # Regras de Negócios
@@ -78,6 +79,8 @@ Em andamento...
    3.1 Imprime uma mensagem dizendo que a conta não foi encontrada e que a operação foi cancelada.<br>
    3.2 Programa encerrado.<br>
 
+## Saque
+1.
 
 # Principais tópicos abordades até o momento em Python
 
