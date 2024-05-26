@@ -64,19 +64,19 @@ Em andamento...
 4. Se o CPF estiver cadastrado, abre uma nova conta.
 
 ## Depósito
-1. Solicita o número da conta onde o depósito vai ser efetuado.
-2. Se a conta existe:
-    2.1 Solicita o valor do depósito.
-    2.2 Se o valor for maior que 0:
-        - 2.2.1 Adiciona o valor ao saldo.
-        - 2.2.2 Registra data e hora do depósito.
-        - 2.2.3 Adiciona o depósito ao extrato.
-        - 2.2.4 Imprime uma mensagem dizendo que o depósito foi efetuado com sucesso. informando a conta e o valor da transação.
-    2.3 Se o valor for menor ou igual a zero:
-        - 2.3.1 Imprime uma mensagem informando que o depósito precisa ser superior a 0 reais.2.3.2 Envia o usuário para o menu principal caso ele queira tentar fazer o depósito novamente ou encerrar o programa.
-3. Se a conta não existe:
-   3.1 Imprime uma mensagem dizendo que a conta não foi encontrada e que a operação foi cancelada.
-   3.2 Programa encerrado.
+1. Solicita o número da conta onde o depósito vai ser efetuado. <br>
+2. Se a conta existe:<br>
+    2.1 Solicita o valor do depósito.<br>
+    2.2 Se o valor for maior que 0:<br>
+        2.2.1 Adiciona o valor ao saldo.<br>
+        2.2.2 Registra data e hora do depósito.<br>
+        2.2.3 Adiciona o depósito ao extrato.<br>
+        2.2.4 Imprime uma mensagem dizendo que o depósito foi efetuado com sucesso informando a conta e o valor da transação.<br>
+    2.3 Se o valor for menor ou igual a zero:<br>
+        2.3.1 Imprime uma mensagem informando que o depósito precisa ser superior a 0 reais.<br>2.3.2 Envia o usuário para o menu principal caso ele queira tentar fazer o depósito novamente ou encerrar o programa.<br>
+3. Se a conta não existe:<br>
+   3.1 Imprime uma mensagem dizendo que a conta não foi encontrada e que a operação foi cancelada.<br>
+   3.2 Programa encerrado.<br>
 
 
 # Principais tópicos abordades até o momento em Python
