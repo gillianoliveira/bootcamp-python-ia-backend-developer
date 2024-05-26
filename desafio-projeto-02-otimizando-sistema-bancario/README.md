@@ -25,22 +25,22 @@ Recriar o código do projeto 'Criando um Sistema Bancário em Python', desafio 1
 
 # Requisitos
 [ ] Recriar as features: saque, depósito e visualizar extrado utilizando funções. <br />
-[ ] Criar uma funcionalidade para cadastrar novos usuários. <br />
-[ ] Criar uma funcionalidade criar conta-corrente. <br />
-[ ] Um usuário é composto por: nome, data de nascimento, cpf e endereço. <br />
-[ ] Uma conta é composta por: agência, número da conta e usuário. <br />
-[ ] O programa deve armazenar contas em uma lista. <br />
+[✓] Criar uma funcionalidade para cadastrar novos usuários. <br />
+[✓] Criar uma funcionalidade criar conta-corrente. <br />
+[✓] Um usuário é composto por: nome, data de nascimento, cpf e endereço. <br />
+[✓] Uma conta é composta por: agência, número da conta e usuário. <br />
+[✓] O programa deve armazenar contas em uma lista. <br />
 [ ] O número da conta é sequencial, iniciando em 1. <br />
-[ ] O número da agência é fixo: "0001". <br />
+[✓] O número da agência é fixo: "0001". <br />
 [ ] Endereço é uma string com formato: logradouro, número - bairro - cidade/ sigla do estado. <br />
-[ ] O CPF deve ser armazenado apenas com números. <br />
+[✓] O CPF deve ser armazenado apenas com números. <br />
 [ ] A função saque deve receber argumentos apenas pelo nome (keyword only). Sugestão de argumentos: saldo, valor, extrato, limite, numero_saques, limite_sques. Sugestão de retorno: saldo e extrato <br />
 [ ] A função depósito deve receber os argumentos apenas por posição (positional only). Sugestão de argumentos:  saldo, valor, extrato. Sugestão de retorno: saldo e extrato. <br />
 
 
 # Regras de Negócios
-[ ] Não deve ser possível cadastrar dois usuários com o mesmo CPF.<br />
-[ ] Um usuário pode ter mais de uma conta, mas uma conta pertence a somente um usuário.<br />
+[✓] Não deve ser possível cadastrar dois usuários com o mesmo CPF.<br />
+[✓] Um usuário pode ter mais de uma conta, mas uma conta pertence a somente um usuário.<br />
 
 *Você pode adicionar novas funções como, por exemplo, listar contas.
 
@@ -61,6 +61,8 @@ Em andamento...
 2. Verifica se o CPF já está cadastrado.
 3. Se o CPF não estiver cadastrado, informa e volta para o menu principal.
 4. Se o CPF estiver cadastrado, abre uma nova conta.
+
+
 
 # Principais tópicos abordades até o momento em Python
 
