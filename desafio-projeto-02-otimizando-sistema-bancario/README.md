@@ -4,7 +4,7 @@
 Bootcamp: Python AI Backend Developer Bootcamp
 Plataforma: dio.me
 Inscrição: 13-05-2024
-Término: em andamento
+Término: 26/05/2024
 Carga horária: 67h
 Promovido por: Vivo
 Veja no Collab: Ainda não criado
@@ -19,6 +19,8 @@ SUMÁRIO:
   - [Criação de nova conta](#criação-de-nova-conta)
   - [Depósito](#depósito)
   - [Saque](#saque)
+  - [Extrato](#extrato)
+- [Pontos a melhorar para a próxima versão](#pontos-a-melhorar-para-a-próxima-versão)
 - [Principais tópicos abordades até o momento em Python](#principais-tópicos-abordades-até-o-momento-em-python)
 
 
@@ -80,7 +82,40 @@ Em andamento...
    3.2 Programa encerrado.<br>
 
 ## Saque
-1.
+1. Solicitar número da conta onde o saque vai ser realizado.
+2. Verificar se a conta existe.
+3. Se a conta existir:<br>
+    3.1 Solicitar o valor do saque.<br>
+    3.2 Verificar se o número de saques diários foi excedido.<br>
+    3.3 Verificar se o valor do saque está dentro do limite permitido.<br>
+    3.4 Verificar se o cliente tem saldo suficiente para fazer o saque.<br>
+    3.5 Se o cliente passar nas verificações 3.2 a 3.4:<br>
+        3.5.1 Efetuar saque<br>
+        3.5.2 Registrar data e hora<br>
+        3.5.3 Adicinar saque ao extrato<br>
+        3.5.4 Imprimir mensagem de sucesso.<br>
+4. Se a conta não existir imprimir mensagem informando que a conta não foi localizada.
+
+## Extrato
+1. Solicitar o número da conta onde vai ser feito o saque.
+2. Verificar se a conta existe.
+3. Se a conta existe:
+    3.1 Listar as operações registradas no extrato
+    3.2 Se a operação for depósito, somar ao saldo
+    3.3 Se a operação for saque, debitar do saldo.
+    3.4 Diminuir o total de saques do total de depósitos
+    3.5 Imprimir o total de depósitos
+    3.6 Imprimir o total de saques
+    3.7 Imprimir o saldo atualizado.
+4. Se a conta não existe: exibir mensagem informando.
+
+# Pontos a melhorar para a próxima versão
+
+1. Tratar erros por valores usando vírgula ao invés de pontos como separador decimal.
+2. Erros gerados por CPFs começados com zero.
+3. Conversão de string para data.
+4. Limitar o número de caracteres nos campos número e Sigla do Estado.
+5. Melhorar a exibição das listas de usuários e contas.
 
 # Principais tópicos abordades até o momento em Python
 
