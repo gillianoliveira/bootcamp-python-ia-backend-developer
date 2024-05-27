@@ -1,7 +1,7 @@
 <h1>Otimizando o Sistema Bancário com Funções em Python</h1>
 
 ```
-Bootcamp: Python AI Backend Developer Bootcamp
+Bootcamp: Python AI Backend Developer
 Plataforma: dio.me
 Inscrição: 13-05-2024
 Término: 26/05/2024
