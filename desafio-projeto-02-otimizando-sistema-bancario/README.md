@@ -7,7 +7,7 @@ Inscrição: 13-05-2024
 Término: 26/05/2024
 Carga horária: 67h
 Promovido por: Vivo
-Veja no Collab: Ainda não criado
+Veja no Collab: [https://colab.research.google.com/drive/1vfuB7IXVY7Z_iZtYooiRb8wdWUP3-r0G?usp=sharing](https://colab.research.google.com/drive/1vfuB7IXVY7Z_iZtYooiRb8wdWUP3-r0G?usp=sharing)
 ```
 
 SUMÁRIO:
