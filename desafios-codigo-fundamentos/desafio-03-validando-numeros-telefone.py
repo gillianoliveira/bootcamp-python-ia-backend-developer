@@ -44,13 +44,6 @@ def validate_numero_telefone(phone_number):
         return 'Número de telefone válido.'
     else:
         return 'Número de telefone inválido.'
-         
-        
-        
-       
-      
-    
-
 
 phone_number = input()  
 
