@@ -5,7 +5,7 @@ Módulo: Dominando Python e suas Estruturas de Dados
 Bootcamp: Python AI Backend Developer
 Plataforma: Dio.me
 Empresa: Vivo
-Concluído em:  
+Concluído em: 26/05/2024 
 '''
 
 # Uma empresa de telecomunicações deseja criar uma solução algorítmica que ajude aos seus clientes a escolherem 
