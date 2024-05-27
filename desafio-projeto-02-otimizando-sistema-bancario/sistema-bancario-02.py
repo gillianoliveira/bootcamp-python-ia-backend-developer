@@ -3,7 +3,7 @@ DESAFIO DE PROJETO
 Criando um Sistema Bancário com Python
 Módulo: Dominando Python e suas Estruturas de Dados	
 Bootcamp: Python AI Backend Developer Bootcamp
-Conclusão do Desafio: ?
+Conclusão do Desafio: 26/05/2024
 Proposta no README
 '''
 
@@ -118,6 +118,9 @@ def visualizar_extrato(numero_conta):
         print(f'Total de depósitos: R$ {total_depositos:.2f}')
         print(f'Total de saques: R$ {total_saques:.2f}')    
         print(f'Saldo: R$ {saldo:.2f}')
+        menu()
+    else:
+        print(f'A conta {numero_conta} não foi localizada.')
         menu()    
        
 def cadastrar_cliente(clientes):
@@ -164,10 +167,14 @@ def abrir_conta(cpf):
 def listar_clientes(clientes):
     for cliente in clientes:
         print(cliente)
+        menu()
+        break
 
 def listar_contas(contas):
     for conta in contas:
-        print(conta) 
+        print(conta)
+        menu()
+        break 
 
 def menu():
     titulo('Menu')
