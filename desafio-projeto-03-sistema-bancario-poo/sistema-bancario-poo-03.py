@@ -15,24 +15,27 @@ class Conta:
         self.correntista = correntista
         self.historico = Historico()
         
-    def abertura_conta():
+    def abertura_conta(self, cliente = Cliente):
         pass
     
-    def sacar():
+    
+    def sacar(self):
         pass
     
-    def depositar():
+    def depositar(self):
         pass
     
-    def saldo():
+    def saldo(self):
         pass
     
     def __str__(self):
         return f"{self.__class__.__name__}: {', '.join([f'{chave}={valor}' for chave, valor in self.__dict__.items()])}"
 
+
+
 class Historico:
     pass
 
 
-class cliente:
+class Cliente:
     pass
