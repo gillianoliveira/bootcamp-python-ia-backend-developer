@@ -32,75 +32,75 @@ class Cliente:
             [3] Microempreendedor
             Opção escolhida: '''))
             if tipo_cliente == 1:
-                cpf = int(input('CPF: '))
-                nome_completo = input("Nome Completo: ")
-                data_nascimento = input("Data de Nascimento: ")
-                telefone = input('Telefone: ')
-                email = input("E-mail: ")
-                logradouro = input("Logradouro: ")
-                numero = input("Número: ")
-                bairro = input("Bairro: ")
-                cidade = input("Cidade: ")
-                estado = input("Estado: ").upper()
-                endereco = f'{logradouro}, {numero}-{bairro}-{cidade}/{estado}'
+                self.cpf = int(input('CPF: '))
+                self.nome_completo = input("Nome Completo: ")
+                self.data_nascimento = input("Data de Nascimento: ")
+                self.telefone = input('Telefone: ')
+                self.email = input("E-mail: ")
+                self.logradouro = input("Logradouro: ")
+                self.numero = input("Número: ")
+                self.bairro = input("Bairro: ")
+                self.cidade = input("Cidade: ")
+                self.estado = input("Estado: ").upper()
+                endereco = f'{self.logradouro}, {self.numero}-{self.bairro}-{self.cidade}/{self.estado}'
                 cliente = {
-                    'cpf': cpf,
-                    'nome_completo': nome_completo,
-                    'data_nascimento': data_nascimento,
-                    'endereco': endereco,
-                    'telefone': telefone,
-                    'email': email
+                    'cpf': self.cpf,
+                    'nome_completo': self.nome_completo,
+                    'data_nascimento': self.data_nascimento,
+                    'endereco': self.endereco,
+                    'telefone': self.telefone,
+                    'email': self.email
                 }
                 cliente.append(cliente)
                 break
             elif tipo_cliente == 2:
-                cnpj = int(input("CNPJ: "))
-                nome_fantasia = input("Nome Fantasia: ")
-                razao_social = input("Razão Social: ")
-                representante_legal = input("Representante Legal: ")
-                cpf_representante_legal = int(input("CPF do Representante Legal: "))
-                data_abertura = input("Representante Legal: ")
-                telefone = int(input("Telefone comercial: "))
-                email = input("E-mail corporativo: ")
-                logradouro = input("Logradouro: ")
-                numero = input("Número: ")
-                bairro = input("Bairro: ")
-                cidade = input("Cidade: ")
-                estado = input("Estado: ").upper()
-                endereco = f'{logradouro}, {numero}-{bairro}-{cidade}/{estado}'
+                self.cnpj = int(input("CNPJ: "))
+                self.nome_fantasia = input("Nome Fantasia: ")
+                self.razao_social = input("Razão Social: ")
+                self.representante_legal = input("Representante Legal: ")
+                self.cpf_representante_legal = int(input("CPF do Representante Legal: "))
+                self.data_abertura = input("Representante Legal: ")
+                self.telefone = int(input("Telefone comercial: "))
+                self.email = input("E-mail corporativo: ")
+                self.logradouro = input("Logradouro: ")
+                self.numero = input("Número: ")
+                self.bairro = input("Bairro: ")
+                self.cidade = input("Cidade: ")
+                self.estado = input("Estado: ").upper()
+                endereco = f'{self.logradouro}, {self.numero}-{self.bairro}-{self.cidade}/{self.estado}'
                 cliente = {
-                    'cnpj': cnpj,
-                    'nome_fantasia': nome_fantasia,
-                    'razao_social': razao_social,
-                    'representante_legal': representante_legal,
-                    'cpf_representante_legal': cpf_representante_legal,
-                    'data_abertura': data_abertura,
-                    'telefone': telefone,
-                    'email': email,
+                    'cnpj': self.cnpj,
+                    'nome_fantasia': self.nome_fantasia,
+                    'razao_social': self.razao_social,
+                    'representante_legal': self.representante_legal,
+                    'cpf_representante_legal': self.cpf_representante_legal,
+                    'data_abertura': self.data_abertura,
+                    'telefone': self.telefone,
+                    'email': self.email,
                     'endereco': endereco}
             elif tipo_cliente == 3:
-                cnpj = int(input("CNPJ: "))
-                cpf = int(input('CPF: '))
-                nome_completo = input("Nome Completo do Cliente: ")
-                data_nascimento = input("Data de Nascimento: ")
-                telefone = int(input("Telefone: "))
-                email = input("E-mail: ")
-                razao_social = input("Razão Social: ")
-                logradouro = input("Logradouro (comercial): ")
-                numero = input("Número: ")
-                bairro = input("Bairro: ")
-                cidade = input("Cidade: ")
-                estado = input("Estado: ").upper()
-                endereco = f'{logradouro}, {numero}-{bairro}-{cidade}/{estado}'
+                self.cnpj = int(input("CNPJ: "))
+                self.cpf = int(input('CPF: '))
+                self.nome_completo = input("Nome Completo do Cliente: ")
+                self.data_nascimento = input("Data de Nascimento: ")
+                self.telefone = int(input("Telefone: "))
+                self.email = input("E-mail: ")
+                self.razao_social = input("Razão Social: ")
+                self.logradouro = input("Logradouro (comercial): ")
+                self.numero = input("Número: ")
+                self.bairro = input("Bairro: ")
+                self.cidade = input("Cidade: ")
+                self.estado = input("Estado: ").upper()
+                endereco = f'{self.logradouro}, {self.numero}-{self.bairro}-{self.cidade}/{self.estado}'
                 cliente = {
-                    'cnpj': cnpj,
-                    'cpf': cpf,
-                    'nome_completo': nome_completo,
-                    'data_nascimento': data_nascimento,
-                    'razao_social': razao_social,
-                    'endereco': endereco,
-                    'telefone': telefone,
-                    'email': email
+                    'cnpj': self.cnpj,
+                    'cpf': self.cpf,
+                    'nome_completo': self.nome_completo,
+                    'data_nascimento': self.data_nascimento,
+                    'razao_social': self.razao_social,
+                    'endereco': self.endereco,
+                    'telefone': self.telefone,
+                    'email': self.email
                 }
             else:
                 print("Opção inválida. Programa encerrado.")
