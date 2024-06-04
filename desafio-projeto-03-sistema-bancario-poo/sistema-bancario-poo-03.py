@@ -16,114 +16,75 @@ def titulo(t):
 
 
 class Cliente:
-    def __init__(self, endereco, telefone, email, tipo_cliente):
-        self.endereco = endereco
-        self.telefone = telefone
-        self.email = email
-        self.tipo_cliente = tipo_cliente
-        self.contas = []
+    def __init__(self, *, tipo_cliente=None, endereco=None, email=None,
+                 telefone=None):
+        self._tipo_cliente = tipo_cliente if tipo_cliente is not None else ''
+        self._endereco = endereco if endereco is not None else ''
+        self._email = email if email is not None else ''
+        self._telefone = telefone if telefone is not None else ''
+        self.clientes = []
 
     def cadastrar_cliente(self):
         while True:
-            tipo_cliente = int(input('''
+            opcao_tipo_cliente = int(input('''
             Tipo de Cliente:
             [1] Pessoa Física,
             [2] Pessoa Jurídica
             [3] Microempreendedor
             Opção escolhida: '''))
-            if tipo_cliente == 1:
-                self.cpf = int(input('CPF: '))
-                self.nome_completo = input("Nome Completo: ")
-                self.data_nascimento = input("Data de Nascimento: ")
-                self.telefone = input('Telefone: ')
-                self.email = input("E-mail: ")
-                self.logradouro = input("Logradouro: ")
-                self.numero = input("Número: ")
-                self.bairro = input("Bairro: ")
-                self.cidade = input("Cidade: ")
-                self.estado = input("Estado: ").upper()
-                endereco = f'{self.logradouro}, {self.numero}-{self.bairro}-{self.cidade}/{self.estado}'
-                cliente = {
-                    'cpf': self.cpf,
-                    'nome_completo': self.nome_completo,
-                    'data_nascimento': self.data_nascimento,
-                    'endereco': self.endereco,
-                    'telefone': self.telefone,
-                    'email': self.email
-                }
-                cliente.append(cliente)
-                break
-            elif tipo_cliente == 2:
-                self.cnpj = int(input("CNPJ: "))
-                self.nome_fantasia = input("Nome Fantasia: ")
-                self.razao_social = input("Razão Social: ")
-                self.representante_legal = input("Representante Legal: ")
-                self.cpf_representante_legal = int(input("CPF do Representante Legal: "))
-                self.data_abertura = input("Representante Legal: ")
-                self.telefone = int(input("Telefone comercial: "))
-                self.email = input("E-mail corporativo: ")
-                self.logradouro = input("Logradouro: ")
-                self.numero = input("Número: ")
-                self.bairro = input("Bairro: ")
-                self.cidade = input("Cidade: ")
-                self.estado = input("Estado: ").upper()
-                endereco = f'{self.logradouro}, {self.numero}-{self.bairro}-{self.cidade}/{self.estado}'
-                cliente = {
-                    'cnpj': self.cnpj,
-                    'nome_fantasia': self.nome_fantasia,
-                    'razao_social': self.razao_social,
-                    'representante_legal': self.representante_legal,
-                    'cpf_representante_legal': self.cpf_representante_legal,
-                    'data_abertura': self.data_abertura,
-                    'telefone': self.telefone,
-                    'email': self.email,
-                    'endereco': endereco}
-            elif tipo_cliente == 3:
-                self.cnpj = int(input("CNPJ: "))
-                self.cpf = int(input('CPF: '))
-                self.nome_completo = input("Nome Completo do Cliente: ")
-                self.data_nascimento = input("Data de Nascimento: ")
-                self.telefone = int(input("Telefone: "))
-                self.email = input("E-mail: ")
-                self.razao_social = input("Razão Social: ")
-                self.logradouro = input("Logradouro (comercial): ")
-                self.numero = input("Número: ")
-                self.bairro = input("Bairro: ")
-                self.cidade = input("Cidade: ")
-                self.estado = input("Estado: ").upper()
-                endereco = f'{self.logradouro}, {self.numero}-{self.bairro}-{self.cidade}/{self.estado}'
-                cliente = {
-                    'cnpj': self.cnpj,
-                    'cpf': self.cpf,
-                    'nome_completo': self.nome_completo,
-                    'data_nascimento': self.data_nascimento,
-                    'razao_social': self.razao_social,
-                    'endereco': self.endereco,
-                    'telefone': self.telefone,
-                    'email': self.email
-                }
+            if opcao_tipo_cliente == 1:
+                cliente = PessoaFisica().cadastrar_pessoa_fisica()
+            elif opcao_tipo_cliente == 2:
+                cliente = PessoaJuridica().cadastrar_pessoa_juridica()
+            elif opcao_tipo_cliente == 3:
+                cliente = Mei().cadastrar_mei()
             else:
-                print("Opção inválida. Programa encerrado.")
-                break
+                print('Opção inválida.')
+                continue
 
-    def exibir_cadastro_cliente(self):
-        pass
+            self.clientes.append(cliente)
+            break
 
 
 class PessoaFisica(Cliente):
-    def __init__(self, *, endereco, telefone, email, tipo_cliente, cpf,
-                 nome_completo, data_nascimento):
-        super().__init__(endereco=endereco, telefone=telefone,
-                         email=email, tipo_cliente=tipo_cliente)
-        self.cpf = cpf
-        self.nome_completo = nome_completo
-        self.data_nascimento = data_nascimento
+    def __init__(self, nome=None, cpf=None, endereco=None, email=None, telefone=None):
+        super().__init__(endereco=endereco, email=email, telefone=telefone, tipo_cliente='Pessoa Física')
+        self._nome = nome if nome is not None else ''
+        self._cpf = cpf if cpf is not None else ''
 
-    def cadastrar_cliente(self):
-        pass
+    def cadastrar_pessoa_fisica(self):
+        self._nome = input("Nome: ")
+        self._cpf = input("CPF: ")
+        _logradouro = input("Logradouro: ")
+        _numero = input("Número: ")
+        _bairro = input("Bairro: ")
+        _cidade = input("Cidade: ")
+        _estado = input("Estado: ").upper()
+        self._endereco = f'{
+                        _logradouro}, {_numero}-{_bairro}-{
+                            _cidade}/{_estado}'
+        self._email = input("E-mail: ")
+        self._telefone = input("Telefone: ")
+
+        cliente = {
+            'tipo_cliente': self._tipo_cliente,
+            'nome': self._nome,
+            'cpf': self._cpf,
+            'endereco': self._endereco,
+            'email': self._email,
+            'telefone': self._telefone
+            }
+
+        self.clientes.append(cliente)
+
+        return cliente
 
 
-class Conta:
+class PessoaJuridica(Cliente):
+    pass
+
+
+class Mei(Cliente):
     pass
 
 
@@ -131,7 +92,7 @@ class Menu_Principal:
 
     def __init__(self):
         self.cliente = Cliente()
-        self.conta = Conta()
+        #self.conta = Conta()
         self.menu()
 
     def menu(self):
@@ -157,8 +118,9 @@ class Menu_Principal:
                 pass
                 # visualizar_extrato()
             case 4:
-                pass
-                # cadastrar_cliente()
+                self.cliente.cadastrar_cliente()
+                print('Cliente cadastrado.')
+                self.menu()
             case 5:
                 pass
                 # abrir_conta()
@@ -179,5 +141,3 @@ class Menu_Principal:
 
 # Início do programa
 menu = Menu_Principal()
-
-
