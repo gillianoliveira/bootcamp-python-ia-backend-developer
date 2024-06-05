@@ -15,6 +15,20 @@ def titulo(t):
     print(f"{traco * 30}")
 
 
+class Validacao:
+
+    @staticmethod
+    def validar_cpf(cpf, clientes):
+        if len(cpf) != 11 or not cpf.isdigit():
+            raise ValueError("CPF inválido. O CPF deve ter 11 dígitos.")
+
+        for cliente in clientes:
+            if cliente["cpf"] == cpf:
+                raise ValueError("CPF já cadastrado.")
+
+        return True
+
+
 class Cliente:
     def __init__(self, *, tipo_cliente=None, endereco=None, email=None,
                  telefone=None):
@@ -57,6 +71,7 @@ class PessoaFisica(Cliente):
     def cadastrar_pessoa_fisica(self):
         self._nome_completo = input("Nome completo: ")
         self._cpf = input("CPF: ")
+        Validacao.validar_cpf(self._cpf, self.clientes)
         _logradouro = input("Logradouro: ")
         _numero = input("Número: ")
         _bairro = input("Bairro: ")
@@ -156,6 +171,15 @@ class Mei(Cliente):
         return cliente
 
 
+class Conta:
+    def __init__(self, agencia='001', numero_conta=None):
+        self._agencia = "001"
+        self._numero_conta = numero_conta
+
+    def depositar(self):
+        pass
+
+
 class Menu_Principal:
 
     def __init__(self):
@@ -187,7 +211,7 @@ class Menu_Principal:
                 # visualizar_extrato()
             case 4:
                 self.cliente.cadastrar_cliente()
-                print('Cliente cadastrado.')
+                print('Cliente cadastrado com sucesso.')
                 self.menu()
             case 5:
                 pass
