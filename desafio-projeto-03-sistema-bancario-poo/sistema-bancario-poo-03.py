@@ -47,15 +47,15 @@ class Cliente:
 
 
 class PessoaFisica(Cliente):
-    def __init__(self, nome=None, cpf=None, endereco=None,
+    def __init__(self, nome_completo=None, cpf=None, endereco=None,
                  email=None, telefone=None):
         super().__init__(endereco=endereco, email=email,
                          telefone=telefone, tipo_cliente='Pessoa Física')
-        self._nome = nome if nome is not None else ''
+        self._nome_completo = nome_completo if nome_completo is not None else ''
         self._cpf = cpf if cpf is not None else ''
 
     def cadastrar_pessoa_fisica(self):
-        self._nome = input("Nome: ")
+        self._nome_completo = input("Nome completo: ")
         self._cpf = input("CPF: ")
         _logradouro = input("Logradouro: ")
         _numero = input("Número: ")
@@ -70,7 +70,7 @@ class PessoaFisica(Cliente):
 
         cliente = {
             'tipo_cliente': self._tipo_cliente,
-            'nome': self._nome,
+            'nome_completo': self._nome_completo,
             'cpf': self._cpf,
             'endereco': self._endereco,
             'email': self._email,
@@ -119,8 +119,41 @@ class PessoaJuridica(Cliente):
 
 
 class Mei(Cliente):
-    pass
+    def __init__(self, *, cnpj=None, cpf=None, nome_completo=None,
+                 tipo_cliente=None, endereco=None, email=None, telefone=None):
+        super().__init__(tipo_cliente=tipo_cliente, endereco=endereco,
+                         email=email, telefone=telefone)
+        self._cnpj = cnpj
+        self.cpf = cpf
+        self.nome_completo = nome_completo
 
+    def cadastrar_mei(self):
+        self._cnpj = input("CNPJ: ")
+        self._cpf = input("CPF: ")
+        self._nome_completo = input("Nome completo: ")
+        _logradouro = input("Logradouro (comercial): ")
+        _numero = input("Número: ")
+        _bairro = input("Bairro: ")
+        _cidade = input("Cidade: ")
+        _estado = input("Estado: ").upper()
+        self._endereco = f'{
+                        _logradouro}, {_numero}-{_bairro}-{
+                            _cidade}/{_estado}'
+        self._email = input("E-mail: ")
+        self._telefone = input("Telefone: ")
+
+        cliente = {
+            'cnpj': self._cnpj,
+            'nome_completo': self._nome_completo,
+            'cpf': self._cpf,
+            'endereco': self._endereco,
+            'email': self._email,
+            'telefone': self._telefone
+        }
+
+        self.clientes.append(cliente)
+
+        return cliente
 
 
 class Menu_Principal:
