@@ -6,6 +6,8 @@ Conclusão do Desafio: Em andamento
 Objetivo no README
 '''
 
+import re
+
 
 # Formata o título das seções
 def titulo(t):
@@ -25,8 +27,12 @@ class Validacao:
         for cliente in clientes:
             if cliente["cpf"] == cpf:
                 raise ValueError("CPF já cadastrado.")
-
         return True
+
+    @staticmethod
+    def validar_estado(estado):
+        if not re.match(r'^[A-Z]{2}$', estado):
+            raise ValueError("Estado inválido. Digite a sigla do estado.")
 
 
 class Cliente:
@@ -77,6 +83,7 @@ class PessoaFisica(Cliente):
         _bairro = input("Bairro: ")
         _cidade = input("Cidade: ")
         _estado = input("Estado: ").upper()
+        Validacao.validar_estado(_estado)
         self._endereco = f'{
                         _logradouro}, {_numero}-{_bairro}-{
                             _cidade}/{_estado}'
@@ -199,36 +206,41 @@ class Menu_Principal:
         [7] Listar Contas
         [8] Sair
         Opção escolhida: '''))
-        match opcao:
-            case 1:
-                pass
-                # depositar()
-            case 2:
-                pass
-                # sacar()
-            case 3:
-                pass
-                # visualizar_extrato()
-            case 4:
-                self.cliente.cadastrar_cliente()
-                print('Cliente cadastrado com sucesso.')
-                self.menu()
-            case 5:
-                pass
-                # abrir_conta()
-            case 6:
-                pass
-                # listar_clientes()
-            case 7:
-                pass
-                # listar_contas()
-            case 8:
-                titulo('Sair')
-                print('Programa encerrado.')
-                exit()
-            case _:
-                print('Opção inválida.')
-                exit()
+        while True:
+            try:
+                match opcao:
+                    case 1:
+                        pass
+                        # depositar()
+                    case 2:
+                        pass
+                        # sacar()
+                    case 3:
+                        pass
+                        # visualizar_extrato()
+                    case 4:
+                        self.cliente.cadastrar_cliente()
+                        print('Cliente cadastrado com sucesso.')
+                        self.menu()
+                    case 5:
+                        pass
+                        # abrir_conta()
+                    case 6:
+                        pass
+                        # listar_clientes()
+                    case 7:
+                        pass
+                        # listar_contas()
+                    case 8:
+                        titulo('Sair')
+                        print('Programa encerrado.')
+                        exit()
+                    case _:
+                        print('Opção inválida.')
+                        exit()
+            except ValueError as e:
+                print(f'Erro de validação: {e}')
+                continue
 
 
 # Início do programa
