@@ -7,6 +7,7 @@ Objetivo no README
 '''
 
 import re
+from datetime import datetime as dt
 
 
 # Formata o título das seções
@@ -34,14 +35,22 @@ class Validacao:
         if not re.match(r'^[A-Z]{2}$', estado):
             raise ValueError("Estado inválido. Digite a sigla do estado.")
 
+    @staticmethod
+    def verificar_se_conta_existe(numero_conta, contas):
+        for conta in contas:
+            if conta._numero_conta == numero_conta:
+                return True
+
+        return False
+
 
 class Cliente:
-    def __init__(self, *, tipo_cliente=None, endereco=None, email=None,
+    def __init__(self, tipo_cliente=None, endereco=None, email=None,
                  telefone=None):
-        self._tipo_cliente = tipo_cliente if tipo_cliente is not None else ''
-        self._endereco = endereco if endereco is not None else ''
-        self._email = email if email is not None else ''
-        self._telefone = telefone if telefone is not None else ''
+        self._tipo_cliente = tipo_cliente
+        self._endereco = endereco
+        self._email = email
+        self._telefone = telefone
         self.clientes = []
 
     def cadastrar_cliente(self):
@@ -120,6 +129,7 @@ class PessoaJuridica(Cliente):
         _bairro = input("Bairro: ")
         _cidade = input("Cidade: ")
         _estado = input("Estado: ").upper()
+        Validacao.validar_estado(_estado)
         self._endereco = f'{
                         _logradouro}, {_numero}-{_bairro}-{
                             _cidade}/{_estado}'
@@ -178,20 +188,43 @@ class Mei(Cliente):
         return cliente
 
 
+class Extrato:
+
+    def adicionar_deposito_ao_extrato():
+        pass
+
+
 class Conta:
-    def __init__(self, agencia='001', numero_conta=None):
-        self._agencia = "001"
+    def __init__(self, agencia='001', numero_conta=None, saldo_inicial=0.0):
+        self._agencia = agencia
+        self._saldo = saldo_inicial
         self._numero_conta = numero_conta
+        self._operacoes = []
 
     def depositar(self):
-        pass
+        titulo('Depósito')
+        numero_conta = int(input("Informe o número da conta: "))
+        if Validacao.verificar_se_conta_existe(numero_conta, self._contas):
+            valor = float(input('Valor do depósito: R$ '))
+            if valor > 0:
+                self._saldo += valor
+                self._data = dt.datetime.now().strftime("%Y-%m-%d %I:%M:%S")
+                operacao = {'operacao': 'Depósito',
+                            'data': self._data,
+                            'valor': valor}
+                self._operacoes.append(operacao)
+                print(f'Depósito de R$ {valor:.2f} realizado com sucesso na conta {numero_conta}.')
+            else:
+                print('O valor do depósito deve ser positivo.')
+        else:
+            print('Conta não localizada. Verifique o número e tente novamente.')
 
 
 class Menu_Principal:
 
     def __init__(self):
-        self.cliente = Cliente()
-        # self.conta = Conta()
+        self.clientes = Cliente()
+        self.contas = Conta()
         self.menu()
 
     def menu(self):
@@ -210,8 +243,8 @@ class Menu_Principal:
             try:
                 match opcao:
                     case 1:
-                        pass
-                        # depositar()
+                        self.contas.depositar()
+                        self.menu()
                     case 2:
                         pass
                         # sacar()
