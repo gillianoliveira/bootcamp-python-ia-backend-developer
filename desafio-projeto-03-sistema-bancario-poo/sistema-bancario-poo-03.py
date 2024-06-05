@@ -47,8 +47,10 @@ class Cliente:
 
 
 class PessoaFisica(Cliente):
-    def __init__(self, nome=None, cpf=None, endereco=None, email=None, telefone=None):
-        super().__init__(endereco=endereco, email=email, telefone=telefone, tipo_cliente='Pessoa Física')
+    def __init__(self, nome=None, cpf=None, endereco=None,
+                 email=None, telefone=None):
+        super().__init__(endereco=endereco, email=email,
+                         telefone=telefone, tipo_cliente='Pessoa Física')
         self._nome = nome if nome is not None else ''
         self._cpf = cpf if cpf is not None else ''
 
@@ -81,18 +83,51 @@ class PessoaFisica(Cliente):
 
 
 class PessoaJuridica(Cliente):
-    pass
+    def __init__(self, *, cnpj=None, razao_social=None, tipo_cliente=None,
+                 endereco=None, email=None, telefone=None):
+        super().__init__(tipo_cliente=tipo_cliente, endereco=endereco,
+                         email=email, telefone=telefone)
+        self._cnpj = cnpj
+        self._razao_social = razao_social
+
+    def cadastrar_pessoa_juridica(self):
+        self._razao_social = input("Razão Social: ")
+        self._cnpj = input("CNPJ: ")
+        _logradouro = input("Logradouro (comercial): ")
+        _numero = input("Número: ")
+        _bairro = input("Bairro: ")
+        _cidade = input("Cidade: ")
+        _estado = input("Estado: ").upper()
+        self._endereco = f'{
+                        _logradouro}, {_numero}-{_bairro}-{
+                            _cidade}/{_estado}'
+        self._email = input("E-mail: ")
+        self._telefone = input("Telefone: ")
+
+        cliente = {
+            'cnpj': self._cnpj,
+            'razao_social': self._razao_social,
+            'endereco': self._endereco,
+            'email': self._email,
+            'telefone': self._telefone,
+            'tipo_cliente': self._tipo_cliente
+            }
+
+        self.clientes.append(cliente)
+
+        return cliente
 
 
 class Mei(Cliente):
     pass
 
 
+
 class Menu_Principal:
 
     def __init__(self):
         self.cliente = Cliente()
-        #self.conta = Conta()
+        # self.conta = Conta()
         self.menu()
 
     def menu(self):
