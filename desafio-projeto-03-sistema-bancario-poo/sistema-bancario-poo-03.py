@@ -51,7 +51,7 @@ class Cliente:
         self._endereco = endereco
         self._email = email
         self._telefone = telefone
-        self.clientes = []
+        self._clientes = []
 
     def cadastrar_cliente(self):
         while True:
@@ -70,9 +70,7 @@ class Cliente:
             else:
                 print('Opção inválida.')
                 continue
-
-            self.clientes.append(cliente)
-            break
+            return cliente
 
 
 class PessoaFisica(Cliente):
@@ -86,7 +84,7 @@ class PessoaFisica(Cliente):
     def cadastrar_pessoa_fisica(self):
         self._nome_completo = input("Nome completo: ")
         self._cpf = input("CPF: ")
-        Validacao.validar_cpf(self._cpf, self.clientes)
+        Validacao.validar_cpf(self._cpf, self._clientes)
         _logradouro = input("Logradouro: ")
         _numero = input("Número: ")
         _bairro = input("Bairro: ")
@@ -108,7 +106,7 @@ class PessoaFisica(Cliente):
             'telefone': self._telefone
             }
 
-        self.clientes.append(cliente)
+        self._clientes.append(cliente)
 
         return cliente
 
@@ -195,16 +193,32 @@ class Extrato:
 
 
 class Conta:
-    def __init__(self, agencia='001', numero_conta=None, saldo_inicial=0.0):
+    def __init__(self, numero_conta=None, agencia=1, saldo_inicial=0.0):
         self._agencia = agencia
         self._saldo = saldo_inicial
         self._numero_conta = numero_conta
         self._operacoes = []
+        self._contas = []
+
+    def abrir_conta(self):
+        titulo('Abertura de Conta')
+        while True:
+            try:
+                cpf = int(input("Informe o CPF do titular da conta: "))
+                Validacao.validar_cpf(cpf, Cliente.clientes)
+                self._numero_conta += 1
+                conta = {'cpf': cpf,
+                         'agencia': self._agencia,
+                         'numero_conta': self._numero_conta}
+                self._contas.append(conta)
+                print('Conta {self._numero_conta} aberta com sucesso para o cliente cpf {cpf}')
+            except ValueError as exc:
+                print(f'Erro: {exc}')
 
     def depositar(self):
         titulo('Depósito')
         numero_conta = int(input("Informe o número da conta: "))
-        if Validacao.verificar_se_conta_existe(numero_conta, self._contas):
+        if Validacao.verificar_se_conta_existe(numero_conta, contas):
             valor = float(input('Valor do depósito: R$ '))
             if valor > 0:
                 self._saldo += valor
@@ -244,7 +258,7 @@ class Menu_Principal:
                 match opcao:
                     case 1:
                         self.contas.depositar()
-                        self.menu()
+                        self.menu(self)
                     case 2:
                         pass
                         # sacar()
@@ -252,12 +266,11 @@ class Menu_Principal:
                         pass
                         # visualizar_extrato()
                     case 4:
-                        self.cliente.cadastrar_cliente()
+                        Cliente.cadastrar_cliente(self)
                         print('Cliente cadastrado com sucesso.')
                         self.menu()
                     case 5:
-                        pass
-                        # abrir_conta()
+                        Conta.abrir_conta(self)
                     case 6:
                         pass
                         # listar_clientes()
