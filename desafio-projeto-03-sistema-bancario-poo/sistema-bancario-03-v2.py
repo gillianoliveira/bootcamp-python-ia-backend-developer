@@ -1,5 +1,3 @@
-import re
-
 
 # Formata o título das seções
 def titulo(t):
@@ -13,33 +11,36 @@ class Validacao:
 
     @staticmethod
     def validar_cpf(cpf, clientes):
-        if len(str(cpf)) != 11:
+        if len(cpf) != 11:
             raise ValueError("CPF inválido. O CPF deve ter 11 dígitos.")
 
         for cliente in clientes:
-            if int(cliente['cpf']) == cpf:
+            if cliente['cpf'] == cpf:
                 raise ValueError("CPF já cadastrado.")
 
         return True
 
-    @staticmethod
-    def validar_uf(estado):
-        if not re.match(r'^[A-Z]{2}$', estado):
-            raise ValueError("Estado inválido. Digite a sigla do estado.")
 
 
 class Cliente:
+    # Lista de clientes
+    _clientes = []
+
     def __init__(self, tipo_cliente=None, endereco=None, telefone=None):
         self._tipo_cliente = tipo_cliente
         self._endereco = endereco
         self._telefone = telefone
-        self._clientes = []
 
-    def adicionar_cliente(self, cliente):
-        self._clientes.append(cliente)
+    @classmethod
+    def adicionar_cliente(cls, cliente):
+        cls._clientes.append(cliente)
+        print("Cliente cadastrado com sucesso.")
 
-    def visualizar_clientes(self):
-        for cliente in self._clientes:
+    @classmethod
+    def visualizar_clientes(cls):
+        if not cls._clientes:
+            print("Nenhum cliente cadastrado.")
+        for cliente in cls._clientes:
             print(cliente)
 
     def cadastrar_cliente(self):
@@ -52,7 +53,7 @@ class Cliente:
             [3] Microempreendedor
             Opção escolhida: '''))
             if opcao_tipo_cliente == 1:
-                cliente = PessoaFisica().cadastrar_pessoa_fisica()
+                cliente = PessoaFisica(self._clientes).cadastrar_pessoa_fisica()
             elif opcao_tipo_cliente == 2:
                 cliente = PessoaJuridica().cadastrar_pessoa_juridica()
             elif opcao_tipo_cliente == 3:
@@ -64,30 +65,50 @@ class Cliente:
 
 
 class PessoaFisica(Cliente):
-    def __init__(self, tipo_cliente=None, endereco=None, telefone=None,
-                 nome=None, cpf=None, data_nascimento=None, email=None):
-        super().__init__(tipo_cliente, endereco, telefone)
-        self._tipo_cliente = tipo_cliente
-        self._endereco = endereco
-        self._telefone = telefone
-        self._nome = nome
-        self._cpf = cpf
-        self._data_nascimento = data_nascimento
-        self._email = email
+    def __init__(self, clientes):
+        super().__init__(self)
+        self._tipo_cliente = "Pessoa Física"
+        self._endereco = None
+        self._telefone = None
+        self._nome = None
+        self._cpf = None
+        self._data_nascimento = None
+        self._email = None
 
     def cadastrar_pessoa_fisica(self):
         while True:
-            cpf = input("CPF: ")
-            Validacao.validar_cpf(cpf, cliente._clientes)
-            nome = input("Nome completo: ").capitalize()
-            logradouro = input("Logradouro: ")
-            numero = input("Número ")
-            bairro = input("Bairro: ")
-            cidade = input("Cidade: ")
-            estado = input("Estado: ").upper()
+            try:
+                cpf = input("CPF: ")
+                Validacao.validar_cpf(cpf, self._clientes)
+                self._nome = input("Nome completo: ").capitalize()
+                self._data_nascimento = input("Data de Nascimento: ")
+                _logradouro = input("Logradouro: ")
+                _numero = input("Número ")
+                _bairro = input("Bairro: ")
+                _cidade = input("Cidade: ")
+                estado = input("Estado: ").upper()
+                Validacao.validar_uf(estado)
+                self._endereco = f'{
+                            _logradouro}, {_numero}-{_bairro}-{
+                                _cidade}/{estado}'
+                self._email = input("E-mail: ")
+                self._telefone = input("Telefone: ")
 
-
-
+                cliente = {
+                    'tipo_cliente': self._tipo_cliente,
+                    'nome': self._nome,
+                    'data_nascimento': self._data_nascimento,
+                    'cpf': cpf,
+                    'endereco': self._endereco,
+                    'email': self._email,
+                    'telefone': self._telefone
+                }
+                self.adicionar_cliente(cliente)
+                break
+            except ValueError as exc:
+                print(f'Erro ao cadastrar cliente: {exc}')
+                print('Por favor, tente novamente.')
+                continue
 
 
 class PessoaJuridica:
@@ -131,7 +152,7 @@ class MenuPrincipal:
                     case 5:
                         pass
                     case 6:
-                        pass
+                        self._cliente.visualizar_clientes()
                     case 7:
                         pass
                         # listar_contas()
