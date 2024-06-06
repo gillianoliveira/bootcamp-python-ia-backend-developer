@@ -8,9 +8,62 @@ def titulo(t):
     print(f"{traco * 30}")
 
 
+class Validacao:
+
+    @staticmethod
+    def validar_cpf(cpf, clientes):
+        if len(str(cpf)) != 11:
+            print('Erro: O CPF deve ter 11 dígitos.')
+            return False
+
+        for cliente in clientes:
+            if cliente['cpf'] == cpf:
+                print("Erro: CPF já cadastrado.")
+
+        return True
+
+
+class Cliente:
+    def __init__(self, tipo_cliente=None, endereco=None, telefone=None):
+        self._tipo_cliente = tipo_cliente
+        self._endereco = endereco
+        self._telefone = telefone
+        self._clientes = []
+
+    def cadastrar_cliente(self):
+        titulo('Cadastrar Cliente')
+        while True:
+            opcao_tipo_cliente = int(input('''
+            Tipo de Cliente:
+            [1] Pessoa Física
+            [2] Pessoa Jurídica
+            [3] Microempreendedor
+            Opção escolhida: '''))
+            if opcao_tipo_cliente == 1:
+                cliente = PessoaFisica().cadastrar_pessoa_fisica()
+            elif opcao_tipo_cliente == 2:
+                cliente = PessoaJuridica().cadastrar_pessoa_juridica()
+            elif opcao_tipo_cliente == 3:
+                cliente = Mei().cadastrar_mei()
+            else:
+                print('Opção inválida.')
+                continue
+            return cliente
+
+
+class PessoaFisica:
+    pass
+
+class PessoaJuridica:
+    pass
+
+class Mei:
+    pass
+
+
 class MenuPrincipal:
-    def __init__(self):
-        pass
+    def __init__(self, cliente):
+        self._cliente = cliente
 
     def menu(self):
         titulo('Menu')
@@ -37,7 +90,8 @@ class MenuPrincipal:
                         pass
                         # visualizar_extrato()
                     case 4:
-                        pass
+                        self._cliente.cadastrar_cliente()
+                        print('Cliente cadastrado com sucesso.')
                     case 5:
                         pass
                     case 6:
@@ -58,5 +112,6 @@ class MenuPrincipal:
 
 
 # Início do programa
-menu = MenuPrincipal()
+cliente = Cliente()
+menu = MenuPrincipal(cliente)
 menu.menu()
