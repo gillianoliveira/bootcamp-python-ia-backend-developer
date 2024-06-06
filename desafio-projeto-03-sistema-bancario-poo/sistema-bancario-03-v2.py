@@ -13,12 +13,11 @@ class Validacao:
     @staticmethod
     def validar_cpf(cpf, clientes):
         if len(str(cpf)) != 11:
-            print('Erro: O CPF deve ter 11 dígitos.')
-            return False
+            raise ValueError("CPF inválido. O CPF deve ter 11 dígitos.")
 
         for cliente in clientes:
-            if cliente['cpf'] == cpf:
-                print("Erro: CPF já cadastrado.")
+            if int(cliente['cpf']) == cpf:
+                raise ValueError("CPF já cadastrado.")
 
         return True
 
@@ -29,6 +28,13 @@ class Cliente:
         self._endereco = endereco
         self._telefone = telefone
         self._clientes = []
+
+    def adicionar_cliente(self, cliente):
+        self._clientes.append(cliente)
+
+    def visualizar_clientes(self):
+        for cliente in self._clientes:
+            print(cliente)
 
     def cadastrar_cliente(self):
         titulo('Cadastrar Cliente')
@@ -51,11 +57,32 @@ class Cliente:
             return cliente
 
 
-class PessoaFisica:
-    pass
+class PessoaFisica(Cliente):
+    def __init__(self, tipo_cliente=None, endereco=None, telefone=None,
+                 nome=None, cpf=None, data_nascimento=None, email=None):
+        super().__init__(tipo_cliente, endereco, telefone)
+        self._tipo_cliente = tipo_cliente
+        self._endereco = endereco
+        self._telefone = telefone
+        self._nome = nome
+        self._cpf = cpf
+        self._data_nascimento = data_nascimento
+        self._email = email
+
+    def cadastrar_pessoa_fisica(self):
+        while True:
+            cpf = input("CPF: ")
+            Validacao.validar_cpf(cpf, cliente._clientes)
+            nome = input("Nome: ")
+            logradouro = input("Logradouro: ")
+            numero = input("Número ")
+
+
+
 
 class PessoaJuridica:
     pass
+
 
 class Mei:
     pass
@@ -91,7 +118,6 @@ class MenuPrincipal:
                         # visualizar_extrato()
                     case 4:
                         self._cliente.cadastrar_cliente()
-                        print('Cliente cadastrado com sucesso.')
                     case 5:
                         pass
                     case 6:
