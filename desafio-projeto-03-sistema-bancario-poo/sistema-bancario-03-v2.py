@@ -1,3 +1,4 @@
+import re
 
 
 # Formata o título das seções
@@ -20,6 +21,11 @@ class Validacao:
                 raise ValueError("CPF já cadastrado.")
 
         return True
+
+    @staticmethod
+    def validar_uf(estado):
+        if not re.match(r'^[A-Z]{2}$', estado):
+            raise ValueError("Estado inválido. Digite a sigla do estado.")
 
 
 class Cliente:
@@ -73,9 +79,13 @@ class PessoaFisica(Cliente):
         while True:
             cpf = input("CPF: ")
             Validacao.validar_cpf(cpf, cliente._clientes)
-            nome = input("Nome: ")
+            nome = input("Nome completo: ").capitalize()
             logradouro = input("Logradouro: ")
             numero = input("Número ")
+            bairro = input("Bairro: ")
+            cidade = input("Cidade: ")
+            estado = input("Estado: ").upper()
+
 
 
 
