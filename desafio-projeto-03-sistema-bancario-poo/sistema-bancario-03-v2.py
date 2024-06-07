@@ -1,3 +1,4 @@
+import datetime as dt
 
 # Formata o título das seções
 def titulo(t):
@@ -117,6 +118,7 @@ class Extrato:
 
 class Conta:
     _contas = []
+    numero_conta = 0
 
     def __init__(self, clientes):
         self._saldo = 0.0
@@ -129,20 +131,44 @@ class Conta:
     def adicionar_titular(self, titular):
         self._titulares.append(titular)
 
+    @classmethod
+    def gerador_numero_conta(cls):
+        numero = cls.numero_conta
+        cls.numero_conta += 1
+        return numero
+
+    @staticmethod
+    def data_da_operacao():
+        data = dt.datetime.now().strftime("%Y-%m-%d %I:%M:%S")
+        return data
+
     def abertura_conta(self):
         titulo('Abertura de Conta')
         while True:
             try:
                 cpf = input("CPF do Titular ou Responsável: ")
                 Validacao.validar_cpf_existente(cpf, self._clientes)
-                tipo_conta = input('''Tipo de conta:
+                tipo_conta = int(input('''
+                Tipo de conta:
                 [1] Conta-corrente pessoa física
                 [2] Conta-corrente corporativa
                 [3] Conta-corrente conjunta
                 [4] Conta-poupança pessoa física
-                Opção escolhida: ''')
+                Opção escolhida: '''))
                 if tipo_conta == 1:
-                    print('Conta aberta com sucesso')
+                    self._numero_conta = conta.gerador_numero_conta()
+                    data = conta.data_da_operacao()
+                    print(f'Tipo conta: {tipo_conta}')
+                    print(f'Data: {data}')
+                    print(f'Agência: {conta._agencia}')
+                    print(f'Numero da conta: {_numero_conta}')
+                    print(f'CPF titular: {cpf}')
+                elif tipo_conta == 2:
+                    print("Conta-corrente corporativa")
+                elif tipo_conta == 2:
+                    print("Conta-corrente conjunta")
+                elif tipo_conta == 3:
+                    print("Conta-poupança pessoa física")
                 break
             except ValueError as exc:
                 print(f'Erro ao abrir conta: {exc}')
@@ -156,8 +182,8 @@ class MenuPrincipal:
         self._conta = conta
 
     def menu(self):
-        titulo('Menu')
         while True:
+            titulo('Menu')
             opcao = int(input('''
             [1] Depositar
             [2] Sacar
