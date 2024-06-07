@@ -21,15 +21,15 @@ class Validacao:
         return True
 
 
-
 class Cliente:
     # Lista de clientes
     _clientes = []
 
-    def __init__(self, tipo_cliente=None, endereco=None, telefone=None):
+    def __init__(self, tipo_cliente=None, endereco=None, telefone=None, conta=None):
         self._tipo_cliente = tipo_cliente
         self._endereco = endereco
         self._telefone = telefone
+        self._conta = conta
 
     @classmethod
     def adicionar_cliente(cls, cliente):
@@ -46,20 +46,10 @@ class Cliente:
     def cadastrar_cliente(self):
         titulo('Cadastrar Cliente')
         while True:
-            opcao_tipo_cliente = int(input('''
-            Tipo de Cliente:
-            [1] Pessoa Física
-            [2] Pessoa Jurídica
-            [3] Microempreendedor
-            Opção escolhida: '''))
-            if opcao_tipo_cliente == 1:
-                cliente = PessoaFisica(self._clientes).cadastrar_pessoa_fisica()
-            elif opcao_tipo_cliente == 2:
-                cliente = PessoaJuridica().cadastrar_pessoa_juridica()
-            elif opcao_tipo_cliente == 3:
-                cliente = Mei().cadastrar_mei()
-            else:
-                print('Opção inválida.')
+            try:
+                PessoaFisica(self._clientes).cadastrar_pessoa_fisica()
+            except ValueError as exc:
+                print(f'Opção inválida. Erro: {exc}')
                 continue
             return cliente
 
@@ -87,7 +77,6 @@ class PessoaFisica(Cliente):
                 _bairro = input("Bairro: ")
                 _cidade = input("Cidade: ")
                 estado = input("Estado: ").upper()
-                Validacao.validar_uf(estado)
                 self._endereco = f'{
                             _logradouro}, {_numero}-{_bairro}-{
                                 _cidade}/{estado}'
@@ -111,17 +100,30 @@ class PessoaFisica(Cliente):
                 continue
 
 
-class PessoaJuridica:
+class Extrato:
     pass
 
 
-class Mei:
-    pass
+class Conta:
+    _contas = []
+
+    def __init__(self):
+        self._saldo = 0.0
+        self._agencia = "0001"
+        self._numero_conta = None
+        self._extrato = Extrato()
+
+    def abertura_conta(self):
+        titulo('Abertura de Conta')
+        while True:
+            cpf = input("CPF do Titular ou Responsável: ")
+            Validacao.validar_cpf(cpf, )
 
 
 class MenuPrincipal:
-    def __init__(self, cliente):
+    def __init__(self, cliente, conta):
         self._cliente = cliente
+        self._conta = conta
 
     def menu(self):
         titulo('Menu')
@@ -150,12 +152,11 @@ class MenuPrincipal:
                     case 4:
                         self._cliente.cadastrar_cliente()
                     case 5:
-                        pass
+                        self._conta.abertura_conta()
                     case 6:
                         self._cliente.visualizar_clientes()
                     case 7:
                         pass
-                        # listar_contas()
                     case 8:
                         titulo('Sair')
                         print('Programa encerrado.')
@@ -170,5 +171,6 @@ class MenuPrincipal:
 
 # Início do programa
 cliente = Cliente()
-menu = MenuPrincipal(cliente)
+conta = Conta()
+menu = MenuPrincipal(cliente, conta)
 menu.menu()
