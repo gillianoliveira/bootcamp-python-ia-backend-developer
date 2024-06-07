@@ -1,5 +1,6 @@
 import datetime as dt
 
+
 # Formata o título das seções
 def titulo(t):
     traco = '-'
@@ -118,14 +119,13 @@ class Extrato:
 
 class Conta:
     _contas = []
-    numero_conta = 0
+    numero_conta = 1
 
     def __init__(self, clientes):
         self._saldo = 0.0
         self._agencia = "0001"
         self._numero_conta = None
         self._titulares = []
-        self._extrato = Extrato()
         self._clientes = clientes
 
     def adicionar_titular(self, titular):
@@ -142,27 +142,53 @@ class Conta:
         data = dt.datetime.now().strftime("%Y-%m-%d %I:%M:%S")
         return data
 
+    @staticmethod
+    def tipo_conta(tipo):
+        tipos_conta = {
+            1: 'Conta-corrente pessoa física',
+            2: 'Conta-corrente corporativa',
+            3: 'Conta-corrente conjunta',
+            4: 'Conta-poupança pessoa física'
+        }
+        return tipos_conta.get(tipo, 'Tipo de conta inválido.')
+
+    # @staticmethod
+    # def tipo_conta(tipo_conta):
+    #     if tipo_conta == 1:
+    #         return 'Conta-corrente pessoa física'
+    #     elif tipo_conta == 2:
+    #         return 'Conta-corrente corporativa'
+    #     elif tipo_conta == 3:
+    #         return 'Conta-corrente conjunta'
+    #     elif tipo_conta == 4:
+    #         return 'Conta-poupança pessoa física'
+
     def abertura_conta(self):
         titulo('Abertura de Conta')
         while True:
             try:
                 cpf = input("CPF do Titular ou Responsável: ")
                 Validacao.validar_cpf_existente(cpf, self._clientes)
-                tipo_conta = int(input('''
+                self._titulares = cpf
+                tipo_conta_input = int(input('''
                 Tipo de conta:
                 [1] Conta-corrente pessoa física
                 [2] Conta-corrente corporativa
                 [3] Conta-corrente conjunta
                 [4] Conta-poupança pessoa física
                 Opção escolhida: '''))
-                if tipo_conta == 1:
-                    self._numero_conta = conta.gerador_numero_conta()
-                    data = conta.data_da_operacao()
-                    print(f'Tipo conta: {tipo_conta}')
-                    print(f'Data: {data}')
-                    print(f'Agência: {conta._agencia}')
-                    print(f'Numero da conta: {_numero_conta}')
-                    print(f'CPF titular: {cpf}')
+                if tipo_conta_input == 1:
+                    self._numero_conta = Conta.gerador_numero_conta()
+                    data = Conta.data_da_operacao()
+                    tipo_conta = Conta.tipo_conta(tipo_conta_input)
+                    conta = {
+                        'tipo_conta': tipo_conta,
+                        'data': data,
+                        'agencia': self._agencia,
+                        'numero_conta': self._numero_conta,
+                        'cpf_titular':  self._titulares
+                    }
+                    return conta
                 elif tipo_conta == 2:
                     print("Conta-corrente corporativa")
                 elif tipo_conta == 2:
