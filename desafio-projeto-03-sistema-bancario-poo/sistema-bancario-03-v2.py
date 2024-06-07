@@ -10,8 +10,8 @@ def titulo(t):
 class Validacao:
 
     @staticmethod
-    def validar_cpf(cpf, clientes):
-        if len(cpf) != 11:
+    def validar_cpf_cadastro(cpf, clientes):
+        if len(cpf) != 11 or not cpf.isdigit():
             raise ValueError("CPF inválido. O CPF deve ter 11 dígitos.")
 
         for cliente in clientes:
@@ -19,6 +19,16 @@ class Validacao:
                 raise ValueError("CPF já cadastrado.")
 
         return True
+
+    def validar_cpf_existente(cpf, clientes):
+        if len(cpf) != 11 or not cpf.isdigit():
+            raise ValueError("CPF inválido. O CPD deve ter 11 dígitos.")
+
+        for cliente in clientes:
+            if cliente['cpf'] == cpf:
+                return True
+
+        raise ValueError("CPF não encontrado. Por favor, cadastre o cliente antes.")
 
 
 class Cliente:
@@ -42,6 +52,10 @@ class Cliente:
             print("Nenhum cliente cadastrado.")
         for cliente in cls._clientes:
             print(cliente)
+
+    @classmethod
+    def obter_clientes(cls):
+        return cls._clientes
 
     def cadastrar_cliente(self):
         titulo('Cadastrar Cliente')
@@ -69,7 +83,7 @@ class PessoaFisica(Cliente):
         while True:
             try:
                 cpf = input("CPF: ")
-                Validacao.validar_cpf(cpf, self._clientes)
+                Validacao.validar_cpf_cadastro(cpf, Cliente.obter_clientes())
                 self._nome = input("Nome completo: ").capitalize()
                 self._data_nascimento = input("Data de Nascimento: ")
                 _logradouro = input("Logradouro: ")
@@ -92,7 +106,7 @@ class PessoaFisica(Cliente):
                     'email': self._email,
                     'telefone': self._telefone
                 }
-                self.adicionar_cliente(cliente)
+                Cliente.adicionar_cliente(cliente)
                 break
             except ValueError as exc:
                 print(f'Erro ao cadastrar cliente: {exc}')
@@ -107,17 +121,32 @@ class Extrato:
 class Conta:
     _contas = []
 
-    def __init__(self):
+    def __init__(self, clientes):
         self._saldo = 0.0
         self._agencia = "0001"
         self._numero_conta = None
+        self._titulares = []
         self._extrato = Extrato()
+        self._clientes = clientes
+
+    def adicionar_titular(self, titular):
+        self._titulares.append(titular)
 
     def abertura_conta(self):
         titulo('Abertura de Conta')
         while True:
-            cpf = input("CPF do Titular ou Responsável: ")
-            Validacao.validar_cpf(cpf, )
+            try:
+                cpf = input("CPF do Titular ou Responsável: ")
+                Validacao.validar_cpf_existente(cpf, self._clientes)
+                for cliente in self._clientes:
+                    self.adicionar_titular(cliente)
+                    break
+                print('Conta aberta com sucesso')
+                break
+            except ValueError as exc:
+                print(f'Erro ao abrir conta: {exc}')
+                print("Por favor, tente novamente.")
+                continue
 
 
 class MenuPrincipal:
@@ -171,6 +200,6 @@ class MenuPrincipal:
 
 # Início do programa
 cliente = Cliente()
-conta = Conta()
+conta = Conta(Cliente.obter_clientes())
 menu = MenuPrincipal(cliente, conta)
 menu.menu()
