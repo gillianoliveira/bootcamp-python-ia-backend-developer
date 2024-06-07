@@ -35,8 +35,7 @@ class Cliente:
     # Lista de clientes
     _clientes = []
 
-    def __init__(self, tipo_cliente=None, endereco=None, telefone=None, conta=None):
-        self._tipo_cliente = tipo_cliente
+    def __init__(self, endereco=None, telefone=None, conta=None):
         self._endereco = endereco
         self._telefone = telefone
         self._conta = conta
@@ -71,7 +70,6 @@ class Cliente:
 class PessoaFisica(Cliente):
     def __init__(self, clientes):
         super().__init__(self)
-        self._tipo_cliente = "Pessoa Física"
         self._endereco = None
         self._telefone = None
         self._nome = None
@@ -98,7 +96,6 @@ class PessoaFisica(Cliente):
                 self._telefone = input("Telefone: ")
 
                 cliente = {
-                    'tipo_cliente': self._tipo_cliente,
                     'nome': self._nome,
                     'data_nascimento': self._data_nascimento,
                     'cpf': cpf,
@@ -138,10 +135,14 @@ class Conta:
             try:
                 cpf = input("CPF do Titular ou Responsável: ")
                 Validacao.validar_cpf_existente(cpf, self._clientes)
-                for cliente in self._clientes:
-                    self.adicionar_titular(cliente)
-                    break
-                print('Conta aberta com sucesso')
+                tipo_conta = input('''Tipo de conta:
+                [1] Conta-corrente pessoa física
+                [2] Conta-corrente corporativa
+                [3] Conta-corrente conjunta
+                [4] Conta-poupança pessoa física
+                Opção escolhida: ''')
+                if tipo_conta == 1:
+                    print('Conta aberta com sucesso')
                 break
             except ValueError as exc:
                 print(f'Erro ao abrir conta: {exc}')
