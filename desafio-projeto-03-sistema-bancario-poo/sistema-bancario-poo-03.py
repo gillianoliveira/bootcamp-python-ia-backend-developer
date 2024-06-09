@@ -22,7 +22,23 @@ class Estilo:
 
 
 class Cliente:
-    pass
+
+    def __init__(self) -> None:
+        self.__endereco = None
+        self.__telefone = None
+        self._contas = []
+
+    def cadastrar_cliente(self):
+        pass
+
+    def visualizar_clientes(self):
+        pass
+
+    def realizar_transacao(self):
+        pass
+
+    def adicionar_conta(self):
+        pass
 
 
 class MenuPrincipal:
