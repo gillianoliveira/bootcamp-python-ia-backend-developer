@@ -22,6 +22,7 @@ class Validacao:
 
         return True
 
+    @staticmethod
     def validar_cpf_existente(cpf, clientes):
         if len(cpf) != 11 or not cpf.isdigit():
             raise ValueError("CPF inválido. O CPD deve ter 11 dígitos.")
@@ -44,11 +45,13 @@ class Cliente:
 
     @classmethod
     def adicionar_cliente(cls, cliente):
+        """Adiciona o dicionário cliente a lista de clientes"""
         cls._clientes.append(cliente)
         print("Cliente cadastrado com sucesso.")
 
     @classmethod
     def visualizar_clientes(cls):
+        """Exibe a lista de clientes. Se vazia exibe mensagem informando."""
         if not cls._clientes:
             print("Nenhum cliente cadastrado.")
         for cliente in cls._clientes:
@@ -59,6 +62,7 @@ class Cliente:
         return cls._clientes
 
     def cadastrar_cliente(self):
+        """Chama o método que cadastra os dados informados pelo cliente."""
         titulo('Cadastrar Cliente')
         while True:
             try:
@@ -80,6 +84,10 @@ class PessoaFisica(Cliente):
         self._email = None
 
     def cadastrar_pessoa_fisica(self):
+        """
+        Cria um dicionário com os dados informados pelo cliente e chama o
+        método que o adiciona a lista de clientes.
+        """
         while True:
             try:
                 cpf = input("CPF: ")
@@ -177,24 +185,33 @@ class Conta:
                 [3] Conta-corrente conjunta
                 [4] Conta-poupança pessoa física
                 Opção escolhida: '''))
+                if tipo_conta_input not in [1, 2, 3, 4]:
+                    print('Opção inválida.')
+                    continue
                 if tipo_conta_input == 1:
                     self._numero_conta = Conta.gerador_numero_conta()
                     data = Conta.data_da_operacao()
-                    tipo_conta = Conta.tipo_conta(tipo_conta_input)
+                    #tipo_conta = Conta.tipo_conta(tipo_conta_input)
                     conta = {
-                        'tipo_conta': tipo_conta,
+                        'tipo_conta': self._tipo_conta,
                         'data': data,
                         'agencia': self._agencia,
                         'numero_conta': self._numero_conta,
                         'cpf_titular':  self._titulares
                     }
+                    if 'contas' not in self._clientes[cpf]:
+                        self._clientes[cpf]['contas'] = []
+                    self._clientes[cpf]['contas'].appeend(conta)
+
+                    self._contas.append(conta)
+                    print(f'Conta {self._numero_conta} aberta com sucesso.')
                     return conta
-                elif tipo_conta == 2:
-                    print("Conta-corrente corporativa")
-                elif tipo_conta == 2:
-                    print("Conta-corrente conjunta")
-                elif tipo_conta == 3:
-                    print("Conta-poupança pessoa física")
+                # elif tipo_conta == 2:
+                #     print("Em constr")
+                # elif tipo_conta == 2:
+                #     print("Conta-corrente conjunta")
+                # elif tipo_conta == 3:
+                #     print("Conta-poupança pessoa física")
                 break
             except ValueError as exc:
                 print(f'Erro ao abrir conta: {exc}')
@@ -208,6 +225,7 @@ class MenuPrincipal:
         self._conta = conta
 
     def menu(self):
+        """Método principal que chama os demais."""
         while True:
             titulo('Menu')
             opcao = int(input('''
