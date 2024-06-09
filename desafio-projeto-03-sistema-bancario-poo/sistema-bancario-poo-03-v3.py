@@ -6,11 +6,16 @@
 # Bootcamp: Python AI Backend Developer Bootcamp
 # Conclusão: em desenvolvimento
 
-def titulo(t):
-    traco = '-'
-    print(f"{traco * 30}")
-    print(f'{t.center(30, " ")}')
-    print(f"{traco * 30}")
+from abc import ABC, abstractmethod
+
+
+class Estilo:
+
+    def titulo(t):
+        traco = '-' * 30
+        print(f"{traco}")
+        print(f'{t.center(30, " ")}')
+        print(f"{traco}")
 
 
 class Cliente(ABC):
