@@ -4,8 +4,9 @@
 # Bootcamp: Python AI Backend Developer Bootcamp
 # Conclusão: em desenvolvimento
 
+import datetime as dt
 import re
-#from abc import ABC, abstractmethod
+# from abc import ABC, abstractmethod
 
 
 class Estilo:
@@ -36,6 +37,10 @@ class Validacao:
             return False
 
 
+class Historico:
+    pass
+
+
 class Cliente():
     __clientes = []
 
@@ -45,15 +50,17 @@ class Cliente():
         # self._conta = Conta()
         # self._transacao = Transacao()
 
-    def cadastrar_cliente(self):
+    @classmethod
+    def cadastrar_cliente(cls):
         Estilo.titulo('Cadastro de Clientes')
         cliente = PessoaFisica.cadastro_pessoa_fisica()
         Cliente.__clientes.append(cliente)
         print('Cadastro realizado com sucesso.')
 
-    def listar_clientes(self):
+    @classmethod
+    def listar_clientes(cls):
         for cliente in Cliente.__clientes:
-            print(cliente)
+            print(f'{cliente}\n')
 
     def realizar_transacao(self):
         pass
@@ -91,6 +98,41 @@ class PessoaFisica(Cliente):
                 f"Data de Nascimento: {self.data_nascimento}\n"
                 f"Endereço: {self.endereco}\n"
                 f"Telefone: {self.telefone}")
+
+
+class Conta:
+
+    def __init__(self, numero: int, agencia: str):
+        self._saldo = 0.0
+        self._cliente = Cliente
+        self._historico = Historico
+        self._numero = None
+        self._agencia = "001"
+
+    @classmethod
+    def gerador_numero_conta(cls):
+        numero = cls._numero
+        cls._numero += 1
+        return numero
+
+    def abertura_conta():
+        pass
+
+    def visualizar_contas():
+        pass
+
+    @staticmethod
+    def data_da_operacao():
+        data = dt.datetime.now().strftime("%Y-%m-%d %I:%M:%S")
+        return data
+
+
+class ContaCorrente(Conta):
+
+    def __init__(self, limite: float, limite_saques: int, numero: int, agencia: str):
+        super().__init__(numero, agencia)
+        self._limite = 500
+        self._limite_saques = 3
 
 
 class MenuPrincipal:
