@@ -31,9 +31,12 @@ class Validacao:
         padrao = r'^(?:\d{3}\.\d{3}\.\d{3}-\d{2}|\d{11})$'
         if re.match(padrao, cpf):
             for cliente in clientes:
-                if cliente['cpf'] == cpf:
-                    raise ValueError("O CPF já está cadastrado.")
+                if cliente.cpf == cpf:
+                    print("O CPF já está cadastrado.")
+                    return False
+            return True
         else:
+            print("CPF inválido. O CPF deve conter 11 dígitos numéricos.")
             return False
 
 
@@ -45,41 +48,43 @@ class Cliente():
     __clientes = []
 
     def __init__(self, endereco=None, telefone=None):
-        self.endereco = endereco
-        self.telefone = telefone
+        self.__endereco = endereco
+        self.__telefone = telefone
         # self._conta = Conta()
         # self._transacao = Transacao()
 
     @classmethod
-    def cadastrar_cliente(cls):
-        Estilo.titulo('Cadastro de Clientes')
-        cliente = PessoaFisica.cadastro_pessoa_fisica()
-        Cliente.__clientes.append(cliente)
-        print('Cadastro realizado com sucesso.')
-
-    @classmethod
     def listar_clientes(cls):
-        for cliente in Cliente.__clientes:
+        for cliente in cls.__clientes:
             print(f'{cliente}\n')
 
+    @classmethod
+    def get_clientes(cls):
+        return cls.__clientes
+
+    @property
     def realizar_transacao(self):
         pass
 
+    @property
     def adicionar_conta(self):
         pass
 
+    def cadastrar_cliente(self):
+        Estilo.titulo('Cadastro de Clientes')
+
+   
 
 class PessoaFisica(Cliente):
 
     def __init__(self, cpf=None, nome=None, data_nascimento=None,
                  endereco=None, telefone=None):
         super().__init__(endereco, telefone)
-        self.cpf = cpf
-        self.nome = nome
-        self.data_nascimento = data_nascimento
+        self.__cpf = cpf
+        self.__nome = nome
+        self.__data_nascimento = data_nascimento
 
-    @staticmethod
-    def cadastro_pessoa_fisica():
+    def cadastrar_cliente(self):
         while True:
             try:
                 cpf = input("CPF: ")
@@ -102,7 +107,7 @@ class PessoaFisica(Cliente):
 
 class Conta:
 
-    def __init__(self, numero: int, agencia: str):
+    def __init__(self):
         self._saldo = 0.0
         self._cliente = Cliente
         self._historico = Historico
@@ -115,10 +120,13 @@ class Conta:
         cls._numero += 1
         return numero
 
-    def abertura_conta():
-        pass
+    def abertura_conta(self):
+        Estilo.titulo('Abertura de Conta')
+        ContaCorrente.criacao_conta_corrente(self)
+        print('Conta criada com sucesso.')
 
-    def visualizar_contas():
+    @classmethod
+    def visualizar_contas(cls):
         pass
 
     @staticmethod
@@ -129,30 +137,47 @@ class Conta:
 
 class ContaCorrente(Conta):
 
-    def __init__(self, limite: float, limite_saques: int, numero: int, agencia: str):
+    def __init__(self, numero: int, agencia: str):
         super().__init__(numero, agencia)
-        self._limite = 500
+        self._limite = 500.00
         self._limite_saques = 3
+
+    def criacao_conta_corrente(self):
+        while True:
+            try:
+                cpf = input("CPF do Titular ou Responsável: ")
+                clientes = Cliente.get_clientes()
+                Validacao.validar_cpf_cadastro(cpf, clientes)
+                break
+            except ValueError as ve:
+                print(f'Erro: {ve}')
 
 
 class MenuPrincipal:
-    def __init__(self, cliente):
+    def __init__(self, cliente, conta):
         self._cliente = cliente
+        self._conta = conta
 
     def menu(self):
         while True:
             Estilo.titulo('Menu')
             opcao = int(input('''
-        [1] Cadastrar Cliente
-        [2] Listar Clientes
+        [1] Abertura de Conta
+        [2] Cadastrar Cliente
+        [3] Listar Clientes
+        [4] Listar Contas
         [8] Sair
         Opção escolhida: '''))
             try:
                 match opcao:
                     case 1:
-                        cliente.cadastrar_cliente()
+                        conta.abertura_conta()
                     case 2:
+                        cliente.cadastrar_cliente()
+                    case 3:
                         cliente.listar_clientes()
+                    case 4:
+                        pass
                     case 8:
                         Estilo.titulo('Sair')
                         print('Programa encerrado.')
@@ -165,5 +190,6 @@ class MenuPrincipal:
 
 
 cliente = Cliente()
-iniciar = MenuPrincipal(cliente)
+conta = Conta()
+iniciar = MenuPrincipal(cliente, conta)
 iniciar.menu()
