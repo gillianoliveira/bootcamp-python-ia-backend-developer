@@ -73,7 +73,7 @@ class Cliente():
     def cadastrar_cliente(self):
         Estilo.titulo('Cadastro de Clientes')
 
-   
+
 
 class PessoaFisica(Cliente):
 
@@ -87,12 +87,12 @@ class PessoaFisica(Cliente):
     def cadastrar_cliente(self):
         while True:
             try:
-                cpf = input("CPF: ")
-                nome = input("Nome completo: ")
-                data_nascimento = input("Data de Nascimento (dd/mm/aaaa): ")
-                endereco = input("Endereço (logradouro, nro - bairro - cidade/sigla estado): ")
-                telefone = input("Telefone: ")
-                cliente = PessoaFisica(cpf=cpf, nome=nome, data_nascimento=data_nascimento, endereco=endereco, telefone=telefone)
+                self.__cpf = input("CPF: ")
+                self.__nome = input("Nome completo: ")
+                self.__data_nascimento = input("Data de Nascimento (dd/mm/aaaa): ")
+                self.__endereco = input("Endereço (logradouro, nro - bairro - cidade/sigla estado): ")
+                self.__telefone = input("Telefone: ")
+                self.__cliente = PessoaFisica(cpf=self.__cpf, nome=self.__nome, data_nascimento=self.__data_nascimento, endereco=self.__endereco, telefone=self.__telefone)
                 return cliente
             except ValueError as ve:
                 print(f'Opção inválida. Erro: {ve}')
@@ -108,11 +108,11 @@ class PessoaFisica(Cliente):
 class Conta:
 
     def __init__(self):
-        self._saldo = 0.0
-        self._cliente = Cliente
-        self._historico = Historico
-        self._numero = None
-        self._agencia = "001"
+        self.__saldo = 0.0
+        self.__cliente = Cliente
+        self.__historico = Historico
+        self.__numero = None
+        self.__agencia = "001"
 
     @classmethod
     def gerador_numero_conta(cls):
