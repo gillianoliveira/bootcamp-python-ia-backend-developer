@@ -37,7 +37,11 @@ class Cliente:
         self.__telefone = telefone
 
     def cadastrar_cliente(self):
-        raise NotImplementedError("A classe filha tem que implementar este método.")
+        try:
+            cliente = pessoa_fisica.cadastrar_cliente()
+            print(cliente)
+        except ValueError as ve:
+            return f'Erro: {ve}'
 
 
 class PessoaFisica(Cliente):
@@ -83,9 +87,9 @@ class PessoaFisica(Cliente):
 
 
 class MenuPrincipal:
-    def __init__(self, cliente, pessoa_fisica):
+    def __init__(self, cliente):
         self._cliente = cliente
-        self._pessoa_fisica = pessoa_fisica
+        # self._pessoa_fisica = pessoa_fisica
         # self._conta = conta
 
     def menu(self):
@@ -103,7 +107,7 @@ class MenuPrincipal:
                     case 1:
                         pass
                     case 2:
-                        self._pessoa_fisica.cadastrar_cliente()
+                        self._cliente.cadastrar_cliente()
                     case 3:
                         pass
                     case 4:
@@ -122,5 +126,5 @@ class MenuPrincipal:
 cliente = Cliente()
 pessoa_fisica = PessoaFisica()
 # conta = Conta()
-iniciar = MenuPrincipal(cliente, pessoa_fisica)
+iniciar = MenuPrincipal(cliente)
 iniciar.menu()
