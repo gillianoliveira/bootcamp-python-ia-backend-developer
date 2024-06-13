@@ -21,14 +21,13 @@ class Validacao:
     @staticmethod
     def verifica_cpf_cadastro(cpf):
         if len(cpf) != 11 or not cpf.isdigit():
-            print('"CPF inválido. O CPF deve ter 11 dígitos."')  # Debugging
             raise ValueError("CPF inválido. O CPF deve ter 11 dígitos.")
         # TODO: Não está exibindo a mensagem das exceções. Motivo desconhecido.
         #  O loop para e volta para o Menu conforme previsto.
         lista_clientes = Cliente.obter_clientes()
         for cliente in lista_clientes:
             if cliente.cpf == cpf:
-                print('CPF já cadastrado.')  # Debugging
+                # print('CPF já cadastrado.')  # Debugging
                 raise ValueError("CPF já cadastrado.")
         return True
 
@@ -83,7 +82,7 @@ class Cliente:
             cliente.cadastrar_cliente()
             cls.adicionar_clientes_lista(cliente)
         except ValueError as ve:
-            return f'Erro: {ve}'
+            print(f'Erro: {ve}')
 
     def __str__(self):
         return f"""
@@ -149,35 +148,29 @@ class MenuPrincipal:
     def menu(self):
         while True:
             Estilo.titulo("Menu")
-            try:
-                opcao = int(input("""
+            opcao = int(input("""
         [1] Abertura de Conta
         [2] Cadastrar Cliente
         [3] Listar Clientes
         [4] Listar Contas
         [8] Sair
         Opção escolhida: """))
-                match opcao:
-                    case 1:
-                        pass
-                    case 2:
-                        try:
-                            self._cliente.cadastrar_cliente()
-                        except ValueError as ve:
-                            print(f'Erro: {ve}')
-                    case 3:
-                        cliente.exibir_lista_clientes()
-                    case 4:
-                        pass
-                    case 8:
-                        Estilo.titulo("Sair")
-                        print("Programa encerrado.")
-                        exit()
-                    case _:
-                        print("Opção inválida. Programa encerrado.")
-                        exit()
-            except ValueError as ve:
-                print(f"Opção inválida. Erro: {ve}")
+            match opcao:
+                case 1:
+                    pass
+                case 2:
+                    self._cliente.cadastrar_cliente()
+                case 3:
+                    cliente.exibir_lista_clientes()
+                case 4:
+                    pass
+                case 8:
+                    Estilo.titulo("Sair")
+                    print("Programa encerrado.")
+                    exit()
+                case _:
+                    print("Opção inválida. Programa encerrado.")
+                    exit()
 
 
 cliente = Cliente()
