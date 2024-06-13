@@ -22,14 +22,23 @@ class Validacao:
     def verifica_cpf_cadastro(cpf):
         if len(cpf) != 11 or not cpf.isdigit():
             raise ValueError("CPF inválido. O CPF deve ter 11 dígitos.")
-        # TODO: Não está exibindo a mensagem das exceções. Motivo desconhecido.
-        #  O loop para e volta para o Menu conforme previsto.
         lista_clientes = Cliente.obter_clientes()
         for cliente in lista_clientes:
             if cliente.cpf == cpf:
                 # print('CPF já cadastrado.')  # Debugging
                 raise ValueError("CPF já cadastrado.")
         return True
+
+    @staticmethod
+    def verifica_cpf_abertura_conta(cpf):
+        if len(cpf) != 11 or not cpf.isdigit():
+            raise ValueError("CPF inválido. O CPF deve ter 11 dígitos.")
+        lista_clientes = Cliente.obter_clientes()
+        for cliente in lista_clientes:
+            if cliente.cpf == cpf:
+                return True
+        print('CPF não cadastrado.')
+        return False
 
 
 class Cliente:
@@ -139,11 +148,91 @@ class PessoaFisica(Cliente):
         return self
 
 
+class Conta:
+
+    contador = 0
+
+    def __init__(self, numero=None, agencia="001", saldo=0) -> None:
+        self.__agencia = agencia
+        self.__numero = Conta.contador + 1
+        self.__saldo = saldo
+        self.__cliente = None
+        self.__historico = None
+        Conta.contador = self.__numero
+
+    @property
+    def numero(self):
+        return self.__numero
+
+    @property
+    def agencia(self):
+        return self.__agencia
+
+    @property
+    def saldo(self):
+        return self.__saldo
+
+    @property
+    def cliente(self):
+        return self.__cliente
+
+    @property
+    def historico(self):
+        return self.__historico
+
+    @numero.setter
+    def numero(self, numero):
+        self.__numero = numero
+
+    @saldo.setter
+    def saldo(self, saldo):
+        self.__saldo = saldo
+
+    def nova_conta(self):
+        conta_corrente = ContaCorrente()
+        return conta_corrente.nova_conta()
+
+    def sacar(self, valor: float) -> bool:
+        if self.__saldo >= valor:
+            self.__saldo -= valor
+            return True
+        return False
+
+    def depositar(self, valor: float) -> bool:
+        if self.__saldo <= valor:
+            self.__saldo -= valor
+            return True
+        return False
+
+
+class ContaCorrente(Conta):
+
+    def __init__(self, numero=None, agencia="001", saldo=0,
+                 limite=500, limite_saques=3) -> None:
+        super().__init__(numero, agencia, saldo)
+        self.__limite = limite
+        self.__limite_saques = limite_saques
+
+    def nova_conta(self):
+        while True:
+            cpf = input('Informe o CPF do titular: ')
+            valida_cpf = Validacao.verifica_cpf_abertura_conta(cpf)
+            if valida_cpf:
+                conta = {'agencia': self.agencia,
+                         'numero_conta': self.numero, 'saldo': self.saldo}
+                return conta
+            else:
+                break
+
+
+class Historico:
+    pass
+
+
 class MenuPrincipal:
-    def __init__(self, cliente):
+    def __init__(self, cliente, conta):
         self._cliente = cliente
-        # self._pessoa_fisica = pessoa_fisica
-        # self._conta = conta
+        self._conta = conta
 
     def menu(self):
         while True:
@@ -157,11 +246,15 @@ class MenuPrincipal:
         Opção escolhida: """))
             match opcao:
                 case 1:
-                    pass
+                    Estilo.titulo('Abertura de Conta')
+                    nova_conta = self._conta.nova_conta()
+                    print(nova_conta)
                 case 2:
+                    Estilo.titulo('Cadastro de Clientes')
                     self._cliente.cadastrar_cliente()
                 case 3:
-                    cliente.exibir_lista_clientes()
+                    Estilo.titulo('Lista de Clientes')
+                    self._cliente.exibir_lista_clientes()
                 case 4:
                     pass
                 case 8:
@@ -175,6 +268,6 @@ class MenuPrincipal:
 
 cliente = Cliente()
 pessoa_fisica = PessoaFisica()
-# conta = Conta()
-iniciar = MenuPrincipal(cliente)
+conta = Conta()
+iniciar = MenuPrincipal(cliente, conta)
 iniciar.menu()
