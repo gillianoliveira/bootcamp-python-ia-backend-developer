@@ -4,6 +4,8 @@
 # Bootcamp: Python AI Backend Developer Bootcamp
 # Conclusão: em desenvolvimento
 
+from datetime import datetime
+
 
 class Estilo:
 
@@ -17,14 +19,17 @@ class Estilo:
 class Validacao:
 
     @staticmethod
-    def verifica_cpf_cadastro(cpf, clientes):
+    def verifica_cpf_cadastro(cpf):
         if len(cpf) != 11 or not cpf.isdigit():
+            print('"CPF inválido. O CPF deve ter 11 dígitos."')  # Debugging
             raise ValueError("CPF inválido. O CPF deve ter 11 dígitos.")
-        # TODO: TypeError: 'NoneType' object is not iterable -
-        # erro de validação com a lista vazia
-        # for cliente in clientes:
-        #     if cliente['cpf'] == cpf:
-        #         raise ValueError("CPF já cadastrado.")
+        # TODO: Não está exibindo a mensagem das exceções. Motivo desconhecido.
+        #  O loop para e volta para o Menu conforme previsto.
+        lista_clientes = Cliente.obter_clientes()
+        for cliente in lista_clientes:
+            if cliente.cpf == cpf:
+                print('CPF já cadastrado.')  # Debugging
+                raise ValueError("CPF já cadastrado.")
         return True
 
 
@@ -65,9 +70,9 @@ class Cliente:
         clientes = Cliente.obter_clientes()
         for pessoa_fisica in clientes:
             print(f"""
-        Nome Completo:{pessoa_fisica.nome}
+        Nome completo:{pessoa_fisica.nome}
         CPF: {pessoa_fisica.cpf}
-        Data de Nascimento: {pessoa_fisica.data_de_nascimento}
+        Data de nascimento: {pessoa_fisica.data_de_nascimento}
         Telefone: {pessoa_fisica.telefone}
         Endereço: {pessoa_fisica.endereco}""")
 
@@ -117,13 +122,14 @@ class PessoaFisica(Cliente):
 
     @cpf.setter
     def cpf(self, cpf):
-        clientes = Cliente.exibir_lista_clientes()
-        Validacao.verifica_cpf_cadastro(cpf, clientes)
+        Validacao.verifica_cpf_cadastro(cpf)
         self.__cpf = cpf
 
     @data_de_nascimento.setter
     def data_de_nascimento(self, data_de_nascimento):
-        self.__data_de_nascimento = data_de_nascimento
+        # TODO: Formatar a data para dd/mm/aaaa. Atual: 2000-09-28 00:00:00
+        dt_data_de_nascimento = datetime.strptime(data_de_nascimento, "%d/%m/%Y")
+        self.__data_de_nascimento = dt_data_de_nascimento
 
     def cadastrar_cliente(self):
         self.cpf = input("CPF: ")
@@ -155,7 +161,10 @@ class MenuPrincipal:
                     case 1:
                         pass
                     case 2:
-                        self._cliente.cadastrar_cliente()
+                        try:
+                            self._cliente.cadastrar_cliente()
+                        except ValueError as ve:
+                            print(f'Erro: {ve}')
                     case 3:
                         cliente.exibir_lista_clientes()
                     case 4:
