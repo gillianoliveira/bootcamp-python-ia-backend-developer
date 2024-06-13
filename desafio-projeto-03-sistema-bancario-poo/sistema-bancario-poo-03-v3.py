@@ -43,6 +43,14 @@ class Cliente:
         except ValueError as ve:
             return f'Erro: {ve}'
 
+    def __str__(self):
+        return f"""\nDados do Cliente:\n
+                     Nome Completo:{pessoa_fisica.nome}\n
+                     CPF: {pessoa_fisica.cpf}\n
+                     Data de Nascimento: {pessoa_fisica.data_de_nascimento}\n
+                     Telefone: {pessoa_fisica.telefone}\n
+                     Endereço: {pessoa_fisica.endereco}"""
+
 
 class PessoaFisica(Cliente):
 
