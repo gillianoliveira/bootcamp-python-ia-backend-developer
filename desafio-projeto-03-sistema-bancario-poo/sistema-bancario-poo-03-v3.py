@@ -48,6 +48,7 @@ class Cliente:
     def __init__(self, endereco=None, telefone=None):
         self.__endereco = endereco
         self.__telefone = telefone
+        self.__contas = []
 
     @property
     def endereco(self):
@@ -92,6 +93,12 @@ class Cliente:
             cls.adicionar_clientes_lista(cliente)
         except ValueError as ve:
             print(f'Erro: {ve}')
+
+    def realizar_transacao(self, conta, transacao):
+        transacao.registrar(conta)
+
+    def adicionar_conta(self, conta):
+        self.__contas.append(conta)
 
     def __str__(self):
         return f"""
@@ -147,17 +154,21 @@ class PessoaFisica(Cliente):
         self.endereco = input("Endereço: ")
         return self
 
+    def adicionar_conta(self):
+        pass
+
 
 class Conta:
 
     contador = 0
+    __contas = []
 
     def __init__(self, numero=None, agencia="001", saldo=0) -> None:
         self.__agencia = agencia
         self.__numero = Conta.contador + 1
         self.__saldo = saldo
         self.__cliente = None
-        self.__historico = None
+        self.__historico = Historico()
         Conta.contador = self.__numero
 
     @property
@@ -188,9 +199,14 @@ class Conta:
     def saldo(self, saldo):
         self.__saldo = saldo
 
-    def nova_conta(self):
+    @classmethod
+    def nova_conta(cls):
         conta_corrente = ContaCorrente()
         return conta_corrente.nova_conta()
+
+    @classmethod
+    def listar_contas(cls):
+        return cls.__contas
 
     def sacar(self, valor: float) -> bool:
         if self.__saldo >= valor:
@@ -199,8 +215,8 @@ class Conta:
         return False
 
     def depositar(self, valor: float) -> bool:
-        if self.__saldo <= valor:
-            self.__saldo -= valor
+        if valor > 0:
+            self.__saldo += valor
             return True
         return False
 
@@ -240,8 +256,12 @@ class MenuPrincipal:
             opcao = int(input("""
         [1] Abertura de Conta
         [2] Cadastrar Cliente
+        [3] Depositar
         [3] Listar Clientes
         [4] Listar Contas
+        [5] Sacar
+        [5] Visualizar Extrato
+        [6] Visualizar Saldo
         [8] Sair
         Opção escolhida: """))
             match opcao:
@@ -256,7 +276,9 @@ class MenuPrincipal:
                     Estilo.titulo('Lista de Clientes')
                     self._cliente.exibir_lista_clientes()
                 case 4:
-                    pass
+                    Estilo.titulo('Lista de Contas')
+                    lista_contas = self._conta.listar_contas()
+                    print(lista_contas)
                 case 8:
                     Estilo.titulo("Sair")
                     print("Programa encerrado.")
