@@ -3,7 +3,7 @@
 # Módulo: Dominando Python e suas Estruturas de Dados
 # Bootcamp: Python AI Backend Developer Bootcamp
 # Conclusão: em desenvolvimento
-
+from abc import ABC, abstractmethod
 from datetime import datetime
 
 
@@ -240,9 +240,20 @@ class ContaCorrente(Conta):
             else:
                 break
 
+    def sacar(self, valor):
+        pass
+
+
+class Transacao(ABC):
+    @abstractmethod
+    def registrar(self, conta):
+        pass
+
 
 class Historico:
-    pass
+
+    def __init__(self) -> None:
+        self.__transacoes = []
 
 
 class MenuPrincipal:
@@ -257,12 +268,12 @@ class MenuPrincipal:
         [1] Abertura de Conta
         [2] Cadastrar Cliente
         [3] Depositar
-        [3] Listar Clientes
-        [4] Listar Contas
-        [5] Sacar
-        [5] Visualizar Extrato
-        [6] Visualizar Saldo
-        [8] Sair
+        [4] Listar Clientes
+        [5] Listar Contas
+        [6] Sacar
+        [7] Visualizar Extrato
+        [8] Visualizar Saldo
+        [9] Sair
         Opção escolhida: """))
             match opcao:
                 case 1:
@@ -273,13 +284,21 @@ class MenuPrincipal:
                     Estilo.titulo('Cadastro de Clientes')
                     self._cliente.cadastrar_cliente()
                 case 3:
+                    pass
+                case 4:
                     Estilo.titulo('Lista de Clientes')
                     self._cliente.exibir_lista_clientes()
-                case 4:
+                case 5:
                     Estilo.titulo('Lista de Contas')
                     lista_contas = self._conta.listar_contas()
                     print(lista_contas)
+                case 6:
+                    Estilo.titulo('Sacar')
+                case 7:
+                    Estilo.titulo('Visualizar Extrato')
                 case 8:
+                    Estilo.titulo('Visualizar Saldo')
+                case 9:
                     Estilo.titulo("Sair")
                     print("Programa encerrado.")
                     exit()
