@@ -42,10 +42,13 @@ class Validacao:
     @staticmethod
     def verifica_se_conta_existe(conta):
         contas = Conta.listar_contas()
+        if contas is None:
+            print("Nenhuma conta cadastrada.")
+            return False
         for conta in contas:
             if conta.numero == conta:
                 return True
-            return True
+            return False
 
 
 class Cliente:
@@ -225,15 +228,28 @@ class Conta:
         cls.__contas.append(conta)
 
     @classmethod
-    def listar_contas(cls):
+    def obter_contas(cls):
         return cls.__contas
+
+    @classmethod
+    def listar_contas(cls):
+        contas = cls.obter_contas()
+        if not contas:
+            return "Nenuma conta cadastada."
+        for conta in contas:
+            print(conta)
+        return False
+    # @classmethod
+    # def listar_contas(cls):
+    #     for conta in cls.__contas:
+    #         return cls.__contas
 
     def sacar(self, valor: float):
         saque = Saque(valor, self, self.cliente)
         return saque.regras_saque(valor)
 
-    def depositar(self, valor: float) -> bool:
-        deposito = Deposito(self, valor, self.cliente)
+    def depositar(self) -> bool:
+        deposito = Deposito(self, self.cliente)
         return deposito.regras_deposito()
 
     def __str__(self) -> str:
@@ -284,19 +300,19 @@ class Transacao(ABC):
 
 class Deposito(Transacao):
 
-    def __init__(self, valor, conta, cliente) -> None:
+    def __init__(self, conta, cliente) -> None:
         super().__init__()
-        self.__valor = valor
-        self.__conta = conta
         self.__cliente = cliente
+        self.__conta = conta
 
     def regras_deposito(self) -> bool:
         numero_conta = input("Informe o número da conta: ")
-        conta_valida = Validacao.verifica_se_conta_existe(numero_conta)
+        Validacao.verifica_se_conta_existe(numero_conta)
+        conta_valida = conta
         if conta_valida:
             valor = float(input("Informe o valor: R$ "))
             if valor > 0:
-                self.__conta.saldo += valor
+                conta_valida.saldo += valor
                 print("Depósito efetuado.")
                 return True
             else:
@@ -305,9 +321,10 @@ class Deposito(Transacao):
             print('Conta não localizada.')
         return False
 
-    def registrar(self, conta):
-        self.__conta.historico.transacoes.append(f'Depósito de R$ {self.__valor}')
-        return super().registrar(conta)
+    def registrar(self):
+        if self.regras_deposito() != False:
+            
+
 
 
 class Saque(Transacao):
@@ -370,14 +387,13 @@ class MenuPrincipal:
                     self._cliente.cadastrar_cliente()
                 case 3:
                     Estilo.titulo('Depósito')
-                    self._conta.depositar(0)
+                    self._conta.depositar()
                 case 4:
                     Estilo.titulo('Lista de Clientes')
                     self._cliente.exibir_lista_clientes()
                 case 5:
                     Estilo.titulo('Lista de Contas')
-                    lista_contas = self._conta.listar_contas()
-                    print(lista_contas)
+                    self._conta.listar_contas()
                 case 6:
                     Estilo.titulo('Sacar')
                     self._conta.saque()
