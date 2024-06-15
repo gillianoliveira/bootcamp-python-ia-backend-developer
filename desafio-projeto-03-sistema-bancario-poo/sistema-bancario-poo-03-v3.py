@@ -25,7 +25,6 @@ class Validacao:
         lista_clientes = Cliente.obter_clientes()
         for cliente in lista_clientes:
             if cliente.cpf == cpf:
-                # print('CPF já cadastrado.')  # Debugging
                 raise ValueError("CPF já cadastrado.")
         return True
 
@@ -39,6 +38,14 @@ class Validacao:
                 return True
         print('CPF não cadastrado.')
         return False
+
+    @staticmethod
+    def verifica_se_conta_existe(conta):
+        contas = Conta.listar_contas()
+        for conta in contas:
+            if conta.numero == conta:
+                return True
+            return True
 
 
 class Cliente:
@@ -69,6 +76,14 @@ class Cliente:
     @classmethod
     def obter_clientes(cls):
         return cls.__clientes
+
+    @classmethod
+    def obter_cliente_por_cpf(cls, cpf):
+        lista_clientes = cls.obter_clientes()
+        for cliente in lista_clientes:
+            if cliente.cpf == cpf:
+                return cliente
+        return None
 
     @classmethod
     def adicionar_clientes_lista(cls, cliente):
@@ -154,9 +169,6 @@ class PessoaFisica(Cliente):
         self.endereco = input("Endereço: ")
         return self
 
-    def adicionar_conta(self):
-        pass
-
 
 class Conta:
 
@@ -165,11 +177,11 @@ class Conta:
 
     def __init__(self, numero=None, agencia="001", saldo=0) -> None:
         self.__agencia = agencia
-        self.__numero = Conta.contador + 1
+        self.__numero = Conta.contador
         self.__saldo = saldo
         self.__cliente = None
         self.__historico = Historico()
-        Conta.contador = self.__numero
+        Conta.contador += 1
 
     @property
     def numero(self):
@@ -199,26 +211,40 @@ class Conta:
     def saldo(self, saldo):
         self.__saldo = saldo
 
+    @cliente.setter
+    def cliente(self, cliente):
+        self.__cliente = cliente
+
     @classmethod
     def nova_conta(cls):
         conta_corrente = ContaCorrente()
         return conta_corrente.nova_conta()
 
     @classmethod
+    def adicionar_conta(cls, conta):
+        cls.__contas.append(conta)
+
+    @classmethod
     def listar_contas(cls):
         return cls.__contas
 
-    def sacar(self, valor: float) -> bool:
-        if self.__saldo >= valor:
-            self.__saldo -= valor
-            return True
-        return False
+    def sacar(self, valor: float):
+        saque = Saque(valor, self, self.cliente)
+        return saque.regras_saque(valor)
 
     def depositar(self, valor: float) -> bool:
-        if valor > 0:
-            self.__saldo += valor
-            return True
-        return False
+        deposito = Deposito(self, valor, self.cliente)
+        return deposito.regras_deposito()
+
+    def __str__(self) -> str:
+        cliente_cpf = self.cliente.cpf if self.cliente else 'Nenhum cliente associado'
+        return f"""
+    Dados da Conta:
+    agência: {self.agencia}
+    conta: {self.numero}
+    saldo: {self.saldo}
+    cliente: {cliente_cpf}
+    """
 
 
 class ContaCorrente(Conta):
@@ -234,9 +260,14 @@ class ContaCorrente(Conta):
             cpf = input('Informe o CPF do titular: ')
             valida_cpf = Validacao.verifica_cpf_abertura_conta(cpf)
             if valida_cpf:
-                conta = {'agencia': self.agencia,
-                         'numero_conta': self.numero, 'saldo': self.saldo}
-                return conta
+                cliente = Cliente.obter_cliente_por_cpf(cpf)
+                if cliente:
+                    self.cliente = cliente
+                    cliente.adicionar_conta(self)
+                    Conta._Conta__contas.append(self)
+                    return self
+                else:
+                    print('Erro ao obter cliete.')
             else:
                 break
 
@@ -245,9 +276,62 @@ class ContaCorrente(Conta):
 
 
 class Transacao(ABC):
+
     @abstractmethod
     def registrar(self, conta):
         pass
+
+
+class Deposito(Transacao):
+
+    def __init__(self, valor, conta, cliente) -> None:
+        super().__init__()
+        self.__valor = valor
+        self.__conta = conta
+        self.__cliente = cliente
+
+    def regras_deposito(self) -> bool:
+        numero_conta = input("Informe o número da conta: ")
+        conta_valida = Validacao.verifica_se_conta_existe(numero_conta)
+        if conta_valida:
+            valor = float(input("Informe o valor: R$ "))
+            if valor > 0:
+                self.__conta.saldo += valor
+                print("Depósito efetuado.")
+                return True
+            else:
+                print("Operação não realizada. Valor inválido.")
+        else:
+            print('Conta não localizada.')
+        return False
+
+    def registrar(self, conta):
+        self.__conta.historico.transacoes.append(f'Depósito de R$ {self.__valor}')
+        return super().registrar(conta)
+
+
+class Saque(Transacao):
+    def __init__(self, valor, conta, cliente) -> None:
+        super().__init__()
+        self.__valor = valor
+        self.__conta = conta
+        self.__cliente = cliente
+
+    def regras_saque(self, valor: float) -> bool:
+        while True:
+            numero_conta = input("Informe o número da conta: ")
+            Validacao.verifica_se_conta_existe(numero_conta)
+            self.__valor = float(input("Informe o valor: R$ "))
+            if self.__conta.saldo >= self.__valor:
+                return True
+            elif conta.__saldo <= 0:
+                print('Operação não realizada. Saldo insuficiente.')
+            elif valor <= 0:
+                print('Operação não realizada. Valor inválido')
+            return False
+
+    def registrar(self, conta):
+        return super().registrar(conta)
 
 
 class Historico:
@@ -262,6 +346,7 @@ class MenuPrincipal:
         self._conta = conta
 
     def menu(self):
+        """Menu principal da aplição que chama as demais funcionalidades."""
         while True:
             Estilo.titulo("Menu")
             opcao = int(input("""
@@ -284,7 +369,8 @@ class MenuPrincipal:
                     Estilo.titulo('Cadastro de Clientes')
                     self._cliente.cadastrar_cliente()
                 case 3:
-                    pass
+                    Estilo.titulo('Depósito')
+                    self._conta.depositar(0)
                 case 4:
                     Estilo.titulo('Lista de Clientes')
                     self._cliente.exibir_lista_clientes()
@@ -294,6 +380,7 @@ class MenuPrincipal:
                     print(lista_contas)
                 case 6:
                     Estilo.titulo('Sacar')
+                    self._conta.saque()
                 case 7:
                     Estilo.titulo('Visualizar Extrato')
                 case 8:
