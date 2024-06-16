@@ -315,6 +315,7 @@ class Deposito(Transacao):
         super().__init__()
         self.__cliente = cliente
         self.__conta = conta
+        self.__valor = 0
 
     def regras_deposito(self) -> bool:
         numero_conta = input("Informe o número da conta: ")
@@ -322,6 +323,8 @@ class Deposito(Transacao):
         if conta_valida:
             valor = float(input("Informe o valor: R$ "))
             if valor > 0:
+                # conta_valida.saldo += valor
+                self.__valor = valor
                 conta_valida.saldo += valor
                 print("Depósito efetuado.")
                 self.registrar(conta_valida)
@@ -376,13 +379,22 @@ class Historico:
     def adicionar_transacao(self, transacao):
         data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         tipo_transacao = type(transacao).__name__
-        valor = transacao._Saque__valor if tipo_transacao == "Saque" else "N/A"
+        if tipo_transacao == "Saque":
+            valor = transacao._Saque__valor
+            conta = transacao._Saque__conta
+        elif tipo_transacao == "Deposito":
+            valor = transacao._Deposito__valor
+            conta = transacao._Deposito__conta
+        else:
+            valor = "N/A"
+            conta = None
+        # valor = transacao._Saque__valor if tipo_transacao == "Saque" else "N/A"
         detalhes_transacao = {
             "data_hora": data_hora,
             "tipo": tipo_transacao,
             "valor": valor,
-            "conta": transacao._Deposito__conta.numero if tipo_transacao == "Deposito" else transacao._Saque__conta.numero,
-            "agencia": transacao._Deposito__conta.agencia if tipo_transacao == "Deposito" else transacao._Saque__conta.agencia
+            "conta": conta.numero if conta else "N/A",  # transacao._Deposito__conta.numero if tipo_transacao == "Deposito" else transacao._Saque__conta.numero,
+            "agencia": conta.agencia if conta else "N/A"  # transacao._Deposito__conta.agencia if tipo_transacao == "Deposito" else transacao._Saque__conta.agencia
         }
         self.__transacoes.append(detalhes_transacao)
 
