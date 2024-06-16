@@ -40,15 +40,15 @@ class Validacao:
         return False
 
     @staticmethod
-    def verifica_se_conta_existe(conta):
-        contas = Conta.listar_contas()
-        if contas is None:
+    def verifica_se_conta_existe(numero_conta):
+        contas = Conta.obter_contas()
+        if not contas:
             print("Nenhuma conta cadastrada.")
             return False
         for conta in contas:
-            if conta.numero == conta:
-                return True
-            return False
+            if conta.numero == int(numero_conta):
+                return conta
+        return False
 
 
 class Cliente:
@@ -239,18 +239,29 @@ class Conta:
         for conta in contas:
             print(conta)
         return False
-    # @classmethod
-    # def listar_contas(cls):
-    #     for conta in cls.__contas:
-    #         return cls.__contas
 
-    def sacar(self, valor: float):
-        saque = Saque(valor, self, self.cliente)
-        return saque.regras_saque(valor)
+    @classmethod
+    def obter_conta_por_numero(cls, numero_conta):
+        for conta in cls.__contas:
+            if conta.numero == int(numero_conta):
+                return conta
+        return None
+
+    def sacar(self):
+        saque = Saque(0, self, self.cliente)
+        return saque.regras_saque()
 
     def depositar(self) -> bool:
         deposito = Deposito(self, self.cliente)
         return deposito.regras_deposito()
+
+    def exibir_extrato(self):
+        numero_conta = input("Informe o número da conta: ")
+        conta = Conta.obter_conta_por_numero(numero_conta)
+        if conta:
+            conta.historico.exibir_historico(conta)
+        else:
+            print('Conta não localizada.')
 
     def __str__(self) -> str:
         cliente_cpf = self.cliente.cpf if self.cliente else 'Nenhum cliente associado'
@@ -307,13 +318,13 @@ class Deposito(Transacao):
 
     def regras_deposito(self) -> bool:
         numero_conta = input("Informe o número da conta: ")
-        Validacao.verifica_se_conta_existe(numero_conta)
-        conta_valida = conta
+        conta_valida = Validacao.verifica_se_conta_existe(numero_conta)
         if conta_valida:
             valor = float(input("Informe o valor: R$ "))
             if valor > 0:
                 conta_valida.saldo += valor
                 print("Depósito efetuado.")
+                self.registrar(conta_valida)
                 return True
             else:
                 print("Operação não realizada. Valor inválido.")
@@ -321,10 +332,8 @@ class Deposito(Transacao):
             print('Conta não localizada.')
         return False
 
-    def registrar(self):
-        if self.regras_deposito() != False:
-            
-
+    def registrar(self, conta):
+        conta.historico.adicionar_transacao(self)
 
 
 class Saque(Transacao):
@@ -334,21 +343,29 @@ class Saque(Transacao):
         self.__conta = conta
         self.__cliente = cliente
 
-    def regras_saque(self, valor: float) -> bool:
-        while True:
-            numero_conta = input("Informe o número da conta: ")
-            Validacao.verifica_se_conta_existe(numero_conta)
-            self.__valor = float(input("Informe o valor: R$ "))
-            if self.__conta.saldo >= self.__valor:
-                return True
-            elif conta.__saldo <= 0:
-                print('Operação não realizada. Saldo insuficiente.')
-            elif valor <= 0:
-                print('Operação não realizada. Valor inválido')
+    def regras_saque(self) -> bool:
+        numero_conta = input("Informe o número da conta: ")
+        conta_valida = Validacao.verifica_se_conta_existe(numero_conta)
+        if conta_valida:
+            while True:
+                self.__valor = float(input("Informe o valor: R$ "))
+                if self.__valor <= 0:
+                    print('Operação não realizada. Valor inválido.')
+                    continue
+                if conta_valida.saldo >= self.__valor:
+                    conta_valida.saldo -= self.__valor
+                    print("Saque efetuado.")
+                    self.registrar(conta_valida)
+                    return True
+                else:
+                    print('Operação não realizada. Saldo insuficiente.')
+                    return False
+        else:
+            print('Conta não localizada.')
             return False
 
     def registrar(self, conta):
-        return super().registrar(conta)
+        conta.historico.adicionar_transacao(self)
 
 
 class Historico:
@@ -356,11 +373,32 @@ class Historico:
     def __init__(self) -> None:
         self.__transacoes = []
 
+    def adicionar_transacao(self, transacao):
+        data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        tipo_transacao = type(transacao).__name__
+        valor = transacao._Saque__valor if tipo_transacao == "Saque" else "N/A"
+        detalhes_transacao = {
+            "data_hora": data_hora,
+            "tipo": tipo_transacao,
+            "valor": valor,
+            "conta": transacao._Deposito__conta.numero if tipo_transacao == "Deposito" else transacao._Saque__conta.numero,
+            "agencia": transacao._Deposito__conta.agencia if tipo_transacao == "Deposito" else transacao._Saque__conta.agencia
+        }
+        self.__transacoes.append(detalhes_transacao)
+
+    def exibir_historico(self, conta):
+        if not self.__transacoes:
+            print("Não há transações para exibir")
+            return
+        for transacao in self.__transacoes:
+            print(f"{transacao['data_hora']}  - {transacao['tipo']} - Valor: {transacao['valor']} - Conta: {transacao['conta']} - Agência: {transacao['agencia']}")
+
 
 class MenuPrincipal:
     def __init__(self, cliente, conta):
         self._cliente = cliente
         self._conta = conta
+        self._historico = Historico()
 
     def menu(self):
         """Menu principal da aplição que chama as demais funcionalidades."""
@@ -374,8 +412,7 @@ class MenuPrincipal:
         [5] Listar Contas
         [6] Sacar
         [7] Visualizar Extrato
-        [8] Visualizar Saldo
-        [9] Sair
+        [8] Sair
         Opção escolhida: """))
             match opcao:
                 case 1:
@@ -396,12 +433,12 @@ class MenuPrincipal:
                     self._conta.listar_contas()
                 case 6:
                     Estilo.titulo('Sacar')
-                    self._conta.saque()
+                    self._conta.sacar()
                 case 7:
                     Estilo.titulo('Visualizar Extrato')
+                    # self._historico.exibir_historico()
+                    conta.exibir_extrato()
                 case 8:
-                    Estilo.titulo('Visualizar Saldo')
-                case 9:
                     Estilo.titulo("Sair")
                     print("Programa encerrado.")
                     exit()
