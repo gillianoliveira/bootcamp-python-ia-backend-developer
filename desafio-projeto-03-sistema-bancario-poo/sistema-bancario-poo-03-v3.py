@@ -243,13 +243,6 @@ class Conta:
             print(conta)
         return False
 
-    @classmethod
-    def obter_conta_por_numero(cls, numero_conta):
-        for conta in cls.__contas:
-            if conta.numero == int(numero_conta):
-                return conta
-        return None
-
     def sacar(self):
         saque = Saque(0, self, self.cliente)
         return saque.regras_saque()
@@ -260,14 +253,14 @@ class Conta:
 
     def exibir_extrato(self):
         numero_conta = input("Informe o número da conta: ")
-        conta = Conta.obter_conta_por_numero(numero_conta)
-        if conta:
-            conta.historico.exibir_historico(conta)
+        conta_valida = Validacao.verifica_se_conta_existe(numero_conta)
+        if conta_valida:
+            conta_valida.historico.exibir_historico(conta_valida)
         else:
             print('Conta não localizada.')
 
     def __str__(self) -> str:
-        cliente_cpf = self.cliente.cpf if self.cliente else 'Nenhum cliente associado'
+        cliente_cpf = self.cliente.cpf if self.cliente else 'Nenhum cliente associado.'
         return f"""
     Dados da Conta:
     agência: {self.agencia}
@@ -403,6 +396,10 @@ class Historico:
     def __init__(self) -> None:
         self.__transacoes = []
 
+    @property
+    def transacoes(self):
+        return self.__transacoes
+
     def adicionar_transacao(self, transacao):
         data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         tipo_transacao = type(transacao).__name__
@@ -415,26 +412,27 @@ class Historico:
         else:
             valor = "N/A"
             conta = None
-        # valor = transacao._Saque__valor if tipo_transacao == "Saque" else "N/A"
         detalhes_transacao = {
             "data_hora": data_hora,
             "tipo": tipo_transacao,
-            "valor": valor,
-            "conta": conta.numero if conta else "N/A",
-            "agencia": conta.agencia if conta else "N/A"
+            "valor": float(valor),
+            "conta": conta.numero,
+            "agencia": conta.agencia
         }
+        print(f"Adicionando transação: {detalhes_transacao}")  # debbuging
         self.__transacoes.append(detalhes_transacao)
 
     def exibir_historico(self, conta):
         total_depositos = 0
         total_saques = 0
         saldo_atual = conta.saldo
-        if not self.__transacoes:
+        if not self.transacoes:
             print("Não há transações para exibir")
             return
-        for transacao in self.__transacoes:
+        for transacao in self.transacoes:
             if transacao['tipo'] == "Deposito":
                 total_depositos += transacao["valor"]
+                print(f"{transacao['data_hora']}  - {transacao['tipo']} - Valor: {transacao['valor']} - Conta: {transacao['conta']} - Agência: {transacao['agencia']}")
             elif transacao["tipo"] == "Saque":
                 total_saques += transacao["valor"]
                 print(f"{transacao['data_hora']}  - {transacao['tipo']} - Valor: {transacao['valor']} - Conta: {transacao['conta']} - Agência: {transacao['agencia']}")
@@ -442,7 +440,6 @@ class Historico:
         print(f"Total de Depósitos: R$ {total_depositos:.2f}")
         print(f"Total de Saques: R$ {total_saques:.2f}")
         print(f"Saldo Atual: R$ {saldo_atual:.2f}")
-
 
 class MenuPrincipal:
     def __init__(self, cliente, conta):
