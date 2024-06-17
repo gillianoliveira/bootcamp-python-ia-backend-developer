@@ -174,17 +174,20 @@ class PessoaFisica(Cliente):
 
 
 class Conta:
-
+    # TO DO: Vericar por que o número da conta está divergente no extrato.
     contador = 0
     __contas = []
 
     def __init__(self, numero=None, agencia="001", saldo=0) -> None:
         self.__agencia = agencia
-        self.__numero = Conta.contador
+        if numero is None:
+            self.__numero = Conta.contador
+            Conta.contador += 1
+        else:
+            self.__numero = numero
         self.__saldo = saldo
         self.__cliente = None
         self.__historico = Historico()
-        Conta.contador += 1
 
     @property
     def numero(self):
@@ -417,17 +420,28 @@ class Historico:
             "data_hora": data_hora,
             "tipo": tipo_transacao,
             "valor": valor,
-            "conta": conta.numero if conta else "N/A",  # transacao._Deposito__conta.numero if tipo_transacao == "Deposito" else transacao._Saque__conta.numero,
-            "agencia": conta.agencia if conta else "N/A"  # transacao._Deposito__conta.agencia if tipo_transacao == "Deposito" else transacao._Saque__conta.agencia
+            "conta": conta.numero if conta else "N/A",
+            "agencia": conta.agencia if conta else "N/A"
         }
         self.__transacoes.append(detalhes_transacao)
 
     def exibir_historico(self, conta):
+        total_depositos = 0
+        total_saques = 0
+        saldo_atual = conta.saldo
         if not self.__transacoes:
             print("Não há transações para exibir")
             return
         for transacao in self.__transacoes:
-            print(f"{transacao['data_hora']}  - {transacao['tipo']} - Valor: {transacao['valor']} - Conta: {transacao['conta']} - Agência: {transacao['agencia']}")
+            if transacao['tipo'] == "Deposito":
+                total_depositos += transacao["valor"]
+            elif transacao["tipo"] == "Saque":
+                total_saques += transacao["valor"]
+                print(f"{transacao['data_hora']}  - {transacao['tipo']} - Valor: {transacao['valor']} - Conta: {transacao['conta']} - Agência: {transacao['agencia']}")
+        print("-" * 30)
+        print(f"Total de Depósitos: R$ {total_depositos:.2f}")
+        print(f"Total de Saques: R$ {total_saques:.2f}")
+        print(f"Saldo Atual: R$ {saldo_atual:.2f}")
 
 
 class MenuPrincipal:
