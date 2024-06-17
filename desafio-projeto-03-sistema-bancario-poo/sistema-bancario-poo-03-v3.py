@@ -281,6 +281,7 @@ class ContaCorrente(Conta):
         super().__init__(numero, agencia, saldo)
         self.__limite = limite
         self.__limite_saques = limite_saques
+        self.__saques_diarios = 0
 
     def nova_conta(self):
         while True:
@@ -298,8 +299,22 @@ class ContaCorrente(Conta):
             else:
                 break
 
-    def sacar(self, valor):
-        pass
+    @property
+    def saques_diarios(self):
+        return self.__saques_diarios
+
+    @saques_diarios.setter
+    def saques_diarios(self, valor):
+        self.__saques_diarios = valor
+
+    def resetar_saques_diarios(self):
+        self.__saques_diarios = 0
+
+    def incrementar_saques_diarios(self):
+        if self.__saques_diarios < self.__limite_saques:
+            self.__saques_diarios += 1
+        else:
+            raise ValueError("Limite diário de saques excedido.")
 
 
 class Transacao(ABC):
@@ -340,23 +355,32 @@ class Deposito(Transacao):
 
 
 class Saque(Transacao):
+
     def __init__(self, valor, conta, cliente) -> None:
         super().__init__()
         self.__valor = valor
         self.__conta = conta
         self.__cliente = cliente
+        self.__LIMITE_SAQUES = 500.00
 
     def regras_saque(self) -> bool:
         numero_conta = input("Informe o número da conta: ")
         conta_valida = Validacao.verifica_se_conta_existe(numero_conta)
         if conta_valida:
+            if conta_valida.saques_diarios >= conta_valida._ContaCorrente__limite_saques:
+                print("Operação não realizada. Limite diário de saques excedido.")
+                return False
             while True:
                 self.__valor = float(input("Informe o valor: R$ "))
                 if self.__valor <= 0:
                     print('Operação não realizada. Valor inválido.')
                     continue
                 if conta_valida.saldo >= self.__valor:
+                    if self.__valor > self.__LIMITE_SAQUES:
+                        print('Operação não realizada. Limite de saque excedido.')
+                        return False
                     conta_valida.saldo -= self.__valor
+                    conta_valida.incrementar_saques_diarios()
                     print("Saque efetuado.")
                     self.registrar(conta_valida)
                     return True
