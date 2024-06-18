@@ -3,7 +3,7 @@
 # Bootcamp: Python AI Backend Developer
 # Plataforma: Dio.me
 # Empresa: Vivo
-# Concluído em:
+# Concluído em: 17/06/2024
 
 
 # Desafio
