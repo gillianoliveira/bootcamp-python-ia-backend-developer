@@ -28,16 +28,16 @@ Você pode utilizar a demo online que eu vou disponibilizar na tabela de ativida
 **Opção 2**: Copiar o script do programa, criar um novo arquivo .py na sua IDE e colar o script e executar. Você precisa ter o Python instalado na máquina para fazer esse procedimento.
 
 **Opção 3**
-Faça um [fork](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) deste repositório. 
+Faça um [fork](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) deste repositório.
 
 **Opção 4**
 Faça o [download](https://docs.github.com/pt/repositories/working-with-files/using-files/downloading-source-code-archives) do repositório.
 
 # Atividades Propostas
 
-| #  | Módulo                                     | Atividade                                          | Tipo                   |  Conclusão     | Collaboratory |               
-|--  |--                                          |--                                                  |--                      |--              |--             | 
-| M2 |Dominando Python e suas Estruturas de Dados | Criando um Sistema Bancário com Python             | Desafio de Projeto     |Publicado       |[![](/img/collab-icon.png)](https://colab.research.google.com/drive/1GbHW4FnGeP50taYokh9kX9vJmryiBmtw?usp=sharing)               |
-| M2 |Dominando Python e suas Estruturas de Dados | Otimizando o Sistema Bancário com Funções em Python| Desafio de Projeto     |Em desenvolvimento |               |
-| M2 |Dominando Python e suas Estruturas de Dados | Verificador de Planos de Internet                  | Desafio de Código      |Aguardando         |               |
-| M2 |Dominando Python e suas Estruturas de Dados |                                                    | Desafio de Código      |Aguardando         |               |
+| #  | Módulo                                     | Atividade                                          | Tipo                   |
+|--  |--                                          |--                                                  |--                      |
+| ✔️ |Dominando Python e suas Estruturas de Dados | Criando um Sistema Bancário com Python             | Desafio de Projeto     |
+| ✔️ |Dominando Python e suas Estruturas de Dados | Otimizando o Sistema Bancário com Funções em Python| Desafio de Projeto     |
+| ✔️ |Dominando Python e suas Estruturas de Dados | Verificador de Planos de Internet                  | Desafio de Código      |
+| ✔️ |Dominando Python e suas Estruturas de Dados | Criando uma lista de equipamentos                  | Desafio de Código      |
