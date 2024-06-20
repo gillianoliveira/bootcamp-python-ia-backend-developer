@@ -37,7 +37,11 @@ Faça o [download](https://docs.github.com/pt/repositories/working-with-files/us
 
 | #  | Módulo                                     | Atividade                                          | Tipo                   |
 |--  |--                                          |--                                                  |--                      |
-| ✔️ |Dominando Python e suas Estruturas de Dados | Criando um Sistema Bancário com Python             | Desafio de Projeto     |
-| ✔️ |Dominando Python e suas Estruturas de Dados | Otimizando o Sistema Bancário com Funções em Python| Desafio de Projeto     |
-| ✔️ |Dominando Python e suas Estruturas de Dados | Verificador de Planos de Internet                  | Desafio de Código      |
-| ✔️ |Dominando Python e suas Estruturas de Dados | Criando uma lista de equipamentos                  | Desafio de Código      |
+| ✔️ |Dominando Python e suas Estruturas de Dados | [Criando um Sistema Bancário com Python](https://github.com/gillianoliveira/bootcamp-python-ia-backend-developer/tree/main/desafio-projeto-01-sistema-bancario)             | Desafio de Projeto     |
+| ✔️ |Dominando Python e suas Estruturas de Dados | [Otimizando o Sistema Bancário com Funções em Python](https://github.com/gillianoliveira/bootcamp-python-ia-backend-developer/tree/main/desafio-projeto-02-otimizando-sistema-bancario)| Desafio de Projeto     |
+| ✔️ |Dominando Python e suas Estruturas de Dados | [Verificador de Planos de Internet](https://github.com/gillianoliveira/bootcamp-python-ia-backend-developer/blob/main/desafios-codigo-fundamentos/desafio-01-verificador-planos-internet.py)                  | Desafio de Código      |
+| ✔️ |Dominando Python e suas Estruturas de Dados | [Criando uma lista de equipamentos](https://github.com/gillianoliveira/bootcamp-python-ia-backend-developer/blob/main/desafios-codigo-fundamentos/desafio-02-criando-lista-equipamentos.py)                  | Desafio de Código      |
+| ✔️ |Dominando Python e suas Estruturas de Dados | [Validando números de telefone](https://github.com/gillianoliveira/bootcamp-python-ia-backend-developer/blob/main/desafios-codigo-fundamentos/desafio-03-validando-numeros-telefone.py)                      | Desafio de Código      |
+| ✔️ |Dominando Python e suas Estruturas de Dados | [Criando uma classe de usuário](https://github.com/gillianoliveira/bootcamp-python-ia-backend-developer/blob/main/desafios-codigo-fundamentos/desafio-04-classe-user.py)                      | Desafio de Código      |
+| ✔️ |Dominando Python e suas Estruturas de Dados | [Adicionando funcionalidades ao plano](https://github.com/gillianoliveira/bootcamp-python-ia-backend-developer/blob/main/desafios-codigo-fundamentos/desafio-05-adicionando-funcionalidades.py)               | Desafio de Código      |
+| ✔️ |Dominando Python e suas Estruturas de Dados | [Realizando chamadas](https://github.com/gillianoliveira/bootcamp-python-ia-backend-developer/blob/main/desafios-codigo-fundamentos/desafio-06-realizando-chamadas.py)                                | Desafio de Código      |
