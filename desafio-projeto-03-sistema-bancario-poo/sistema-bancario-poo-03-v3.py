@@ -1,8 +1,8 @@
 # DESAFIO DE PROJETO
-# Criando um Sistema Bancário com Python - parte 3
-# Módulo: Dominando Python e suas Estruturas de Dados
+# Modelando um Sistema bancário com POO e Python
+# Módulo: Orientação a Objetos e Boas Práticas em Python
 # Bootcamp: Python AI Backend Developer Bootcamp
-# Conclusão: em desenvolvimento
+# Conclusão: Finalizado
 from abc import ABC, abstractmethod
 from datetime import datetime
 

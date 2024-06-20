@@ -37,8 +37,8 @@ O repositório oficial da Dio para este desafio pode ser encontrado no link a se
 [✓] Aproveitar as lógicas dos métodos criados nas etapas anteriores.<br />
 
 # Requisitos
-[ ] Utilizar o Paradgma de Orientação a Objetos ao invés de métodos soltos.<br />
-[ ] O valor máximo do saque deve ser R$ 500,00.<br />
-[ ] O cliente pode realizar no máximo 3 saques por dia.<br />
-[ ] Para criar uma nova conta o CPF deve estar previamente cadastrado.<br />
-[ ] O CPF não pode ser cadastrado mais de uma vez.<br />
+[✓] Utilizar o Paradgma de Orientação a Objetos ao invés de métodos soltos.<br />
+[✓] O valor máximo do saque deve ser R$ 500,00.<br />
+[✓] O cliente pode realizar no máximo 3 saques por dia.<br />
+[✓] Para criar uma nova conta o CPF deve estar previamente cadastrado.<br />
+[✓] O CPF não pode ser cadastrado mais de uma vez.<br />
