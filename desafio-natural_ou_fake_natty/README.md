@@ -48,6 +48,8 @@ Na metade do livro comecei a pedir para ele gerar os prompts para criar as perso
 
 Também solicitei uma ficha catalográfica do livro e para isso forneci autor, responsáveis pelas imagens, local, ano e editora. O resto foi dado por ele.
 
+![](../img/processo-diagramacao.png)
+
 ## Reflexão (Opcional)
 Não achei fácil como dizem. Criar qualquer coisa é sempre fácil, mas quando há um projeto em mente a coisa complica bastante. Manter a consitência na geração das imagens é muito mais difícil do que parece. Pelo menos usando a camada gratuita. O texto em geral é genérico. Cabe ao autor lapidar e reescrever o que for necessário. As vezes reescrever é mais trabalhoso do que escrever do zero. Foi uma experiência bem interessante e o resultado surpreendente.
 
