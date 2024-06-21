@@ -5,6 +5,8 @@ SUMÁRIO
   - [Descrição](#descrição)
   - [Tecnologias Utilizadas](#tecnologias-utilizadas)
   - [Processo de Criação](#processo-de-criação)
+  - [Reflexão (Opcional)](#reflexão-opcional)
+  - [Resultados](#resultados)
 - [Repositório Oficial](#repositório-oficial)
 - [Template](#template)
 - [Exemplos e Insigths](#exemplos-e-insigths)
@@ -42,7 +44,16 @@ Olá! Por favor preciso criar um livro recontando a história da chapeuzinho ver
 ```
 Na sequência ele gerou um resumo de cada capítulo. Baseado neles eu escrevevia até certo ponto e pedia para ele continuar. Dessa forma eu conseguia fazer com que ele seguisse a minha linha de pensamento ao invés de criar coisas aleatórias.
 
-Usei muitos clichês conhecidos para facilitar o entendimento dele e de fato isso fez a conversa fluir bem. Em algumas coisas nos divergimos. Ele insistiu que a Chapeuzinho Vermelho é uma super heroína que salva pessoas e tal e que tem super habilidades. Ele insiste em colocar um 'dispositivo de hacking' que até agora não identifiquei o que seria.
+Na metade do livro comecei a pedir para ele gerar os prompts para criar as personagens no Leonard.AI.
+
+Também solicitei uma ficha catalográfica do livro e para isso forneci autor, responsáveis pelas imagens, local, ano e editora. O resto foi dado por ele.
+
+## Reflexão (Opcional)
+Não achei fácil como dizem. Criar qualquer coisa é sempre fácil, mas quando há um projeto em mente a coisa complica bastante. Manter a consitência na geração das imagens é muito mais difícil do que parece. Pelo menos usando a camada gratuita. O texto em geral é genérico. Cabe ao autor lapidar e reescrever o que for necessário. As vezes reescrever é mais trabalhoso do que escrever do zero. Foi uma experiência bem interessante e o resultado surpreendente.
+
+
+## Resultados
+O resultado é o e-book em .pdf que está neste repositório.
 
 # Repositório Oficial
 O repositório oficial desse desafio está disponível no endereço a seguir: [https://github.com/digitalinnovationone/lab-natty-or-not](https://github.com/digitalinnovationone/lab-natty-or-not)
