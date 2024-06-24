@@ -11,7 +11,7 @@ Sumário:
     - [Criação do ambiente virtual](#criação-do-ambiente-virtual)
       - [Ambiente virtual usando virtualenv](#ambiente-virtual-usando-virtualenv)
       - [Ambiente virtual usando Pyenv](#ambiente-virtual-usando-pyenv)
-- [Instalação dos módulos](#instalação-dos-módulos)
+- [Instalação das dependências](#instalação-das-dependências)
 
 
 # Repositório Oficial do Lab
@@ -66,7 +66,7 @@ A seguir você encontra duas opções para criar seu ambiente virtual usando:
 
 #### Ambiente virtual usando virtualenv
 
-Nativo do Pytho a partir da versão 3.3.
+Nativo do Python a partir da versão 3.3.
 
 Criação do ambiente virtual via CMD:
 
@@ -93,7 +93,7 @@ Para ativar o ambiente virtual criado use o comando a seguir também no cmd, ond
 pyenv activate workoutapi
 ```
 
-# Instalação dos módulos
+# Instalação das dependências
 Depois de ativar o ambiente virtual, execute o comando a seguir no CMD para instalar de uma só vez todos os pacotes necessários para o início da api. Pode ser que outros sejam utilizados mais adiante.
 
 ```txt
