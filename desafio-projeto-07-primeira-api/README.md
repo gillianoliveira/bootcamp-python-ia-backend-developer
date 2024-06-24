@@ -6,6 +6,7 @@ Sumário:
 
 - [Repositório Oficial do Lab](#repositório-oficial-do-lab)
 - [💻Recursos utilizados](#recursos-utilizados)
+- [Desafio final](#desafio-final)
 
 
 # Repositório Oficial do Lab
@@ -29,4 +30,24 @@ Documentação: [https://www.sqlalchemy.org/](https://www.sqlalchemy.org/)
 
 [Docker](https://www.docker.com/): Docker é uma plataforma de software que permite criar, implantar e gerenciar aplicações em contêineres. Um contêiner é uma unidade leve, portátil e autosuficiente que inclui tudo o que a aplicação precisa para rodar: código, runtime, bibliotecas e dependências do sistema. Ele permite o isolamento da aplicação, é portável, escalável e permite a integração com sistemas CI/CD para automatizar o desenvolvimento.
 
+Python 3.10.4 e ambiente virtual Venv.
 
+# Desafio final
+
+```txt
+1 - adicionar query parameters nos endpoints
+    - atleta
+        - nome
+        - cpf
+2 - customizar response de retorno de endpoints
+    - get all
+        - atleta
+            - nome
+            - centro_treinamento
+            - categoria
+3 - Manipular exceção de integridade dos dados em cada módulo/tabela
+    - sqlalchemy.exc.IntegrityError e devolver a seguinte mensagem: “Já existe um atleta cadastrado com o cpf: x”
+    - status_code: 303
+4 - Adicionar paginação utilizando a lib: fastapi-pagination
+    - limit e offset
+```
