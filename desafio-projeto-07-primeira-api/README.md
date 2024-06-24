@@ -12,7 +12,7 @@ Sumário:
       - [Ambiente virtual usando virtualenv](#ambiente-virtual-usando-virtualenv)
       - [Ambiente virtual usando Pyenv](#ambiente-virtual-usando-pyenv)
   - [Instalação das dependências](#instalação-das-dependências)
-  - [Testndo o servidor](#testndo-o-servidor)
+  - [Testando o servidor](#testando-o-servidor)
   - [Makefile](#makefile)
 
 
@@ -102,7 +102,7 @@ Depois de ativar o ambiente virtual, execute o comando a seguir no CMD para inst
 pip install fastapi uvicorn sqlalchemy pydantic
 ```
 
-## Testndo o servidor
+## Testando o servidor
 Utilize o comando a seguir no CMD para subir o servidor:
 
 ```txt
@@ -156,3 +156,4 @@ Para executar o comando exemplificado acima, use a palavra make acompanhada do n
 ```
 make run
 ```
+
