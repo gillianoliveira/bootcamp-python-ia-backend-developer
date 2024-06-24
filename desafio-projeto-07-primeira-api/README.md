@@ -6,6 +6,7 @@ Sumário:
 
 - [Repositório Oficial do Lab](#repositório-oficial-do-lab)
 - [💻Recursos utilizados](#recursos-utilizados)
+  - [Comandos úteis](#comandos-úteis)
 - [Desafio final](#desafio-final)
 
 
@@ -31,6 +32,18 @@ Documentação: [https://www.sqlalchemy.org/](https://www.sqlalchemy.org/)
 [Docker](https://www.docker.com/): Docker é uma plataforma de software que permite criar, implantar e gerenciar aplicações em contêineres. Um contêiner é uma unidade leve, portátil e autosuficiente que inclui tudo o que a aplicação precisa para rodar: código, runtime, bibliotecas e dependências do sistema. Ele permite o isolamento da aplicação, é portável, escalável e permite a integração com sistemas CI/CD para automatizar o desenvolvimento.
 
 Python 3.10.4 e ambiente virtual Venv.
+
+## Comandos úteis
+
+Criação do ambiente virtual
+```txt
+py -m venv .venv_workout
+```
+
+Ativação do ambiente virtual via cmd
+```txt
+.venv_workout\Scripts\activate
+```
 
 # Desafio final
 
