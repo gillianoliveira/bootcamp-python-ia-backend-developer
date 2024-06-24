@@ -14,6 +14,7 @@ Sumário:
   - [Instalação das dependências](#instalação-das-dependências)
   - [Testando o servidor](#testando-o-servidor)
   - [Makefile](#makefile)
+  - [Declarative Base do SQLAlchemy](#declarative-base-do-sqlalchemy)
 
 
 # Repositório Oficial do Lab
@@ -156,4 +157,14 @@ Para executar o comando exemplificado acima, use a palavra make acompanhada do n
 ```
 make run
 ```
+
+## Declarative Base do SQLAlchemy
+
+O declarative_base do SQLAlchemy é uma função que serve como uma base para a definição de classes de modelos ORM (Object-Relational Mapping). Essas classes representam tabelas no banco de dados. O uso do declarative_base permite que você defina as tabelas e suas relações de maneira declarativa e orientada a objetos.
+
+Ao usar o declarative_base, você cria uma classe base a partir da qual todas as suas classes de modelo irão herdar. Isso fornece uma maneira padronizada de definir tabelas do banco de dados como classes Python.
+
+As classes definidas usando declarative_base são automaticamente mapeadas para tabelas no banco de dados. Você define atributos de classe que correspondem às colunas da tabela e o SQLAlchemy cuida do resto.
+
+Documentação: [https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase](https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase)
 
