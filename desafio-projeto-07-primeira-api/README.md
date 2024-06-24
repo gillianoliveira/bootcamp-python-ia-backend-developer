@@ -6,8 +6,12 @@ Sumário:
 
 - [Repositório Oficial do Lab](#repositório-oficial-do-lab)
 - [💻Recursos utilizados](#recursos-utilizados)
-  - [Comandos úteis](#comandos-úteis)
 - [Desafio final](#desafio-final)
+  - [Anotações](#anotações)
+    - [Criação do ambiente virtual](#criação-do-ambiente-virtual)
+      - [Ambiente virtual usando virtualenv](#ambiente-virtual-usando-virtualenv)
+      - [Ambiente virtual usando Pyenv](#ambiente-virtual-usando-pyenv)
+- [Instalação dos módulos](#instalação-dos-módulos)
 
 
 # Repositório Oficial do Lab
@@ -31,19 +35,7 @@ Documentação: [https://www.sqlalchemy.org/](https://www.sqlalchemy.org/)
 
 [Docker](https://www.docker.com/): Docker é uma plataforma de software que permite criar, implantar e gerenciar aplicações em contêineres. Um contêiner é uma unidade leve, portátil e autosuficiente que inclui tudo o que a aplicação precisa para rodar: código, runtime, bibliotecas e dependências do sistema. Ele permite o isolamento da aplicação, é portável, escalável e permite a integração com sistemas CI/CD para automatizar o desenvolvimento.
 
-Python 3.10.4 e ambiente virtual Venv.
-
-## Comandos úteis
-
-Criação do ambiente virtual
-```txt
-py -m venv .venv_workout
-```
-
-Ativação do ambiente virtual via cmd
-```txt
-.venv_workout\Scripts\activate
-```
+Python 3.12.3 e ambiente virtual Venv.
 
 # Desafio final
 
@@ -63,4 +55,47 @@ Ativação do ambiente virtual via cmd
     - status_code: 303
 4 - Adicionar paginação utilizando a lib: fastapi-pagination
     - limit e offset
+```
+
+## Anotações
+
+### Criação do ambiente virtual
+A seguir você encontra duas opções para criar seu ambiente virtual usando:
+* virtualenv ou
+* pyenv
+
+#### Ambiente virtual usando virtualenv
+
+Nativo do Pytho a partir da versão 3.3.
+
+Criação do ambiente virtual via CMD:
+
+```txt
+py -m venv .venv_workout
+```
+
+Ativação do ambiente virtual via CMD:
+
+```txt
+.venv_workout\Scripts\activate
+```
+
+#### Ambiente virtual usando Pyenv
+É necessário instalar o [Pyenv](https://pypi.org/project/pyenv/) previamente. Depois execute no cmd o comando a seguir. Nele você pode especificar a versão do Python que será utilizada, seguido do nome do ambiente.
+
+```txt
+pyenv virtualenv 3.11.4 workoutapi
+```
+
+Para ativar o ambiente virtual criado use o comando a seguir também no cmd, onde workoutapi é o nome do ambiente criado.
+
+```txt
+pyenv activate workoutapi
+```
+
+# Instalação dos módulos
+Depois de ativar o ambiente virtual, execute o comando a seguir no CMD para instalar de uma só vez todos os pacotes necessários para o início da api. Pode ser que outros sejam utilizados mais adiante.
+
+```txt
+pip install fastapi uvicorn sqlalchemy pydantic
 ```
