@@ -15,6 +15,7 @@ Sumário:
   - [Testando o servidor](#testando-o-servidor)
   - [Makefile](#makefile)
   - [Declarative Base do SQLAlchemy](#declarative-base-do-sqlalchemy)
+  - [UUID do SQL Alchemy](#uuid-do-sql-alchemy)
 
 
 # Repositório Oficial do Lab
@@ -168,3 +169,10 @@ As classes definidas usando declarative_base são automaticamente mapeadas para 
 
 Documentação: [https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase](https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase)
 
+
+## UUID do SQL Alchemy
+O UUID (Universally Unique Identifier) do SQLAlchemy é um tipo de dado utilizado para armazenar identificadores únicos que são globalmente únicos. Esses identificadores são úteis para garantir que cada entrada em uma tabela de banco de dados tenha um identificador único que não colida com outros, mesmo em diferentes bancos de dados ou sistemas distribuídos.
+Ao definir uma coluna em uma tabela do banco de dados com SQLAlchemy, você pode especificar que ela deve ser do tipo UUID. Vantagens:
+* Unicidade Global: Garante que cada ID seja único em todo o mundo.
+* Segurança: UUIDs são difíceis de prever, aumentando a segurança em alguns contextos.
+* Descentralização: Útil em sistemas distribuídos onde diferentes partes do sistema precisam gerar IDs únicos sem coordenar com um servidor central.
