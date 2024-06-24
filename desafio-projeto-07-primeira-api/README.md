@@ -11,7 +11,8 @@ Sumário:
     - [Criação do ambiente virtual](#criação-do-ambiente-virtual)
       - [Ambiente virtual usando virtualenv](#ambiente-virtual-usando-virtualenv)
       - [Ambiente virtual usando Pyenv](#ambiente-virtual-usando-pyenv)
-- [Instalação das dependências](#instalação-das-dependências)
+  - [Instalação das dependências](#instalação-das-dependências)
+  - [Testndo o servidor](#testndo-o-servidor)
 
 
 # Repositório Oficial do Lab
@@ -93,9 +94,32 @@ Para ativar o ambiente virtual criado use o comando a seguir também no cmd, ond
 pyenv activate workoutapi
 ```
 
-# Instalação das dependências
+## Instalação das dependências
 Depois de ativar o ambiente virtual, execute o comando a seguir no CMD para instalar de uma só vez todos os pacotes necessários para o início da api. Pode ser que outros sejam utilizados mais adiante.
 
 ```txt
 pip install fastapi uvicorn sqlalchemy pydantic
+```
+
+## Testndo o servidor
+Utilize o comando a seguir no CMD para subir o servidor:
+
+```txt
+uvicorn diretorio.arquivo:app
+```
+No nosso exemplo seria:
+
+```txt
+uvicorn workout_api.main:app
+```
+
+O CMD deve exibir uma mensagem de sucesso com o link a seguir:
+
+```txt
+http://127.0.0.1:8000
+```
+
+Você também poderá acessar a documentação através do link a seguir, mas no começo do projeto, ela estará vazia.
+```txt
+http://127.0.0.1:8000/docs
 ```
