@@ -13,6 +13,7 @@ Sumário:
       - [Ambiente virtual usando Pyenv](#ambiente-virtual-usando-pyenv)
   - [Instalação das dependências](#instalação-das-dependências)
   - [Testndo o servidor](#testndo-o-servidor)
+  - [Makefile](#makefile)
 
 
 # Repositório Oficial do Lab
@@ -122,4 +123,36 @@ http://127.0.0.1:8000
 Você também poderá acessar a documentação através do link a seguir, mas no começo do projeto, ela estará vazia.
 ```txt
 http://127.0.0.1:8000/docs
+```
+
+## Makefile
+O arquivo Makefile não tem extensão.
+
+Para funcionar corretamente, o arquivo Makefile precisa estar no mesmo nível da pasta do projeto. Este projeto está na pasta workout_api.
+
+No presente projeto temos a seguinte estrutura:
+```txt
+📁 desafio-projeto-07-primeira-api
+    📁 .venv_workout
+    📁 workout_api
+    ⚙️ Makefile
+    📑 README.md
+```
+Caso o arquivo Makefile estivesse dentro da pasta workout_api, por exemplo ocorreria o erro:
+
+```txt
+make: *** No rule to make target 'run'.  Stop.
+```
+Exemplo de comando criado no Makefile:
+
+```txt
+run:
+	@uvicorn workout_api.main:app --reload
+
+```
+
+Para executar o comando exemplificado acima, use a palavra make acompanhada do nome do comando. Se estiver trabalhando em um ambiente virtual, lembre-se de ativá-lo primeiro. No CMD digite:
+
+```
+make run
 ```
