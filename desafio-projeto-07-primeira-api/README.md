@@ -19,6 +19,7 @@ Sumário:
   - [Alembic](#alembic)
   - [Requirements](#requirements)
   - [asyncpg](#asyncpg)
+- [Docker-compose](#docker-compose)
 
 
 # Repositório Oficial do Lab
@@ -90,8 +91,22 @@ Ativação do ambiente virtual via CMD:
 #### Ambiente virtual usando Pyenv
 É necessário instalar o [Pyenv](https://pypi.org/project/pyenv/) previamente. Depois execute no cmd o comando a seguir. Nele você pode especificar a versão do Python que será utilizada, seguido do nome do ambiente.
 Instalação do pyenv para Windows:
-[https://github.com/pyenv-win/pyenv-win](https://github.com/pyenv-win/pyenv-win) - instruções no Quick Start. Atenção! Abra o Power Shell como Admin para executar o comando de instalação, depois feche e abra novamente para testar.
+[https://github.com/pyenv-win/pyenv-win](https://github.com/pyenv-win/pyenv-win) - instruções no Quick Start. Atenção! Abra o Power Shell como Admin para executar o comando de instalação, depois feche e abra novamente para continuar.
 
+Instalação do pyenv no Windows usando Power Shell:
+```txt
+Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+```
+
+Depois de instalar o pyenv, você deve criar as variáveis de ambiente. Use os comandos a seguir no Power Shell:
+```txt
+[System.Environment]::SetEnvironmentVariable('PYENV', "$HOME\.pyenv\pyenv-win", 'User')
+[System.Environment]::SetEnvironmentVariable('PATH', "$env:PYENV\bin;$env:PYENV\shims;$env:PATH", 'User')
+```
+Para testar se o comando pyenv está sendo reconhecido:
+```txt
+pyenv --version
+```
 Criação do ambiente no projeto:
 ```txt
 pyenv virtualenv 3.11.4 workoutapi
@@ -207,6 +222,8 @@ Instalação do asyncpg:
 pip install asyncpg
 ```
 
+Depois de rodar o container Docker e configurar o DBeaver para a conexão com o Postgres, alterar o arquivo env.py dentro do Alembic.
+
 ## Requirements
 
 O arquivo requirements.txt é um arquivo utilizado em projetos Python para listar todas as dependências (bibliotecas e pacotes) necessárias para executar o projeto. Este arquivo permite que outras pessoas ou sistemas configurem o ambiente adequado para rodar o projeto de maneira fácil e consistente.
@@ -229,5 +246,34 @@ Ele suporta várias funcionalidades avançadas do PostgreSQL, incluindo tipos de
 ```txt
 pip install asyncpg
 ```
+
+# Docker-compose
+
+Abra o terminal. Ative o ambiente virtual e digite o comando a seguir:
+
+```txt
+docker-compose up -d
+```
+
+Se ocorrer algum erro, verifique se o serviço Docker está ativo e se o wsl está atualizado e funcional.
+
+Depois de iniciar o container, abra o DBeaver e configure a conexão Postgres com os mesmos dados do 'docker-compose.yml'.
+
+```txt
+environment:
+      POSTGRES_PASSWORD: workout
+      POSTGRES_USER: workout
+      POSTGRES_DB: workout
+```
+No nosso exemplo o banco de dados, o usuário e a senha se chamam workout.
+No DBeaver clique em Nova Conexão ou 'CTRL + SHIFT + N' >> selecione o Postgres e preencha os campos conforme exemplo a seguir:
+```txt
+Banco de dados: workout
+Usuário: workout
+Senha: workout
+```
+Depois teste a conexão en se estiver tudo certo, clique em 'Concluir'.
+
+![DBeaver](../img/docker-configuracoes.png)
 
 
