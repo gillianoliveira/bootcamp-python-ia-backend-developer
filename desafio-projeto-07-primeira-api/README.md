@@ -18,6 +18,7 @@ Sumário:
   - [UUID do SQL Alchemy](#uuid-do-sql-alchemy)
   - [Alembic](#alembic)
   - [Requirements](#requirements)
+  - [asyncpg](#asyncpg)
 
 
 # Repositório Oficial do Lab
@@ -88,7 +89,10 @@ Ativação do ambiente virtual via CMD:
 
 #### Ambiente virtual usando Pyenv
 É necessário instalar o [Pyenv](https://pypi.org/project/pyenv/) previamente. Depois execute no cmd o comando a seguir. Nele você pode especificar a versão do Python que será utilizada, seguido do nome do ambiente.
+Instalação do pyenv para Windows:
+[https://github.com/pyenv-win/pyenv-win](https://github.com/pyenv-win/pyenv-win) - instruções no Quick Start. Atenção! Abra o Power Shell como Admin para executar o comando de instalação, depois feche e abra novamente para testar.
 
+Criação do ambiente no projeto:
 ```txt
 pyenv virtualenv 3.11.4 workoutapi
 ```
@@ -197,6 +201,12 @@ Ativação do Alembic:
 ```txt
 alembic init alembic
 ```
+Instalação do asyncpg:
+
+```txt
+pip install asyncpg
+```
+
 ## Requirements
 
 O arquivo requirements.txt é um arquivo utilizado em projetos Python para listar todas as dependências (bibliotecas e pacotes) necessárias para executar o projeto. Este arquivo permite que outras pessoas ou sistemas configurem o ambiente adequado para rodar o projeto de maneira fácil e consistente.
@@ -205,6 +215,19 @@ Ele especifica todas as bibliotecas que o projeto depende, junto com suas versõ
 
 ```txt
 pip freeze > requirements.txt
-
 ```
+
+## asyncpg
+'asyncpg' é uma biblioteca Python de alto desempenho para trabalhar com bancos de dados PostgreSQL de forma assíncrona. Ela é projetada para uso com o framework asyncio, que permite a escrita de código assíncrono em Python, proporcionando maior eficiência e escalabilidade em aplicações que lidam com operações de I/O intensivas, como consultas a bancos de dados.
+
+'asyncpg' é otimizado para ser mais rápido que outras bibliotecas de PostgreSQL para Python, como psycopg2. Ele utiliza uma implementação de protocolo otimizada e técnicas de redução de overhead para alcançar um desempenho superior.
+
+Sendo uma biblioteca assíncrona, asyncpg permite que você realize consultas ao banco de dados sem bloquear a execução do programa. Isso é particularmente útil em aplicações web, servidores, e outras aplicações onde a latência e a capacidade de resposta são críticas.
+
+Ele suporta várias funcionalidades avançadas do PostgreSQL, incluindo tipos de dados avançados, índices, e operações de alto desempenho.
+
+```txt
+pip install asyncpg
+```
+
 
