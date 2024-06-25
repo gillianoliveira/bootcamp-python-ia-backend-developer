@@ -16,6 +16,8 @@ Sumário:
   - [Makefile](#makefile)
   - [Declarative Base do SQLAlchemy](#declarative-base-do-sqlalchemy)
   - [UUID do SQL Alchemy](#uuid-do-sql-alchemy)
+  - [Alembic](#alembic)
+  - [Requirements](#requirements)
 
 
 # Repositório Oficial do Lab
@@ -176,3 +178,33 @@ Ao definir uma coluna em uma tabela do banco de dados com SQLAlchemy, você pode
 * Unicidade Global: Garante que cada ID seja único em todo o mundo.
 * Segurança: UUIDs são difíceis de prever, aumentando a segurança em alguns contextos.
 * Descentralização: Útil em sistemas distribuídos onde diferentes partes do sistema precisam gerar IDs únicos sem coordenar com um servidor central.
+
+## Alembic
+Alembic é uma ferramenta de migração de banco de dados usada em conjunto com SQLAlchemy. Ele permite gerenciar e aplicar alterações na estrutura do banco de dados de maneira controlada e incremental, facilitando a evolução do esquema do banco de dados ao longo do tempo sem perder dados.
+
+Alembic ajuda a manter o esquema do banco de dados sincronizado com as definições do modelo em seu código. Isso é particularmente útil em projetos onde o esquema do banco de dados está em constante evolução.
+Permite criar arquivos de migração que documentam as alterações no esquema do banco de dados, como adição ou remoção de tabelas e colunas, alteração de tipos de dados, e muito mais.
+
+Cada migração criada pelo Alembic é versionada, o que significa que você pode aplicar, reverter ou refazer migrações específicas. Isso facilita o controle de versões do esquema do banco de dados, especialmente em equipes de desenvolvimento colaborativo.
+Para utilizar é preciso fazer a instalação previamente:
+
+```txt
+pip install alembic
+```
+
+Ativação do Alembic:
+
+```txt
+alembic init alembic
+```
+## Requirements
+
+O arquivo requirements.txt é um arquivo utilizado em projetos Python para listar todas as dependências (bibliotecas e pacotes) necessárias para executar o projeto. Este arquivo permite que outras pessoas ou sistemas configurem o ambiente adequado para rodar o projeto de maneira fácil e consistente.
+
+Ele especifica todas as bibliotecas que o projeto depende, junto com suas versões, garantindo que o ambiente de desenvolvimento seja consistente em diferentes máquinas. Usar o requirements.txt simplifica a instalação das dependências com um único comando, facilitando a configuração do ambiente.
+
+```txt
+pip freeze > requirements.txt
+
+```
+
