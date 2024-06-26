@@ -400,4 +400,5 @@ FodyWeavers.xsd
 #Arquivos do projeto
 alembic.ini
 .venv_workout
+.venv/
 desafio-projeto-03-sistema-bancario-poo/.vscode/launch.json
