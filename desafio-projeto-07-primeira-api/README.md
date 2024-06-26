@@ -180,6 +180,11 @@ Para executar o comando exemplificado acima, use a palavra make acompanhada do n
 make run
 ```
 
+Comando para testar a migration:
+```txt
+make create-migrations d="init_db"
+```
+
 ## Declarative Base do SQLAlchemy
 
 O declarative_base do SQLAlchemy é uma função que serve como uma base para a definição de classes de modelos ORM (Object-Relational Mapping). Essas classes representam tabelas no banco de dados. O uso do declarative_base permite que você defina as tabelas e suas relações de maneira declarativa e orientada a objetos.
