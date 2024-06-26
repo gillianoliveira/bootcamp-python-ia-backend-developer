@@ -180,9 +180,14 @@ Para executar o comando exemplificado acima, use a palavra make acompanhada do n
 make run
 ```
 
-Comando para testar a migration:
+Comando para criar o banco de dados
 ```txt
 make create-migrations d="init_db"
+```
+
+Comando para rodar o banco de dados:
+```txt
+make run-migrations
 ```
 
 ## Declarative Base do SQLAlchemy
