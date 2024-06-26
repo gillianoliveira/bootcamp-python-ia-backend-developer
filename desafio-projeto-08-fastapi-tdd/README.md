@@ -110,14 +110,17 @@ Feche o terminal e abra novamente.
 9 - Criar o ambiente virtual na pasta do projeto:
 
 ```txt
-python -m venv .venv
+py -m venv .venv
 ```
 
 10 - Ativar o ambiente virtual na pasta do projeto:
 ```txt
-source .venv/Scripts/activate
+.venv\Scripts\activate
 ```
-
+11 - Sair do ambiente virtual:
+```txt
+deactivate
+```
 
 ### Comandos extras:
 
