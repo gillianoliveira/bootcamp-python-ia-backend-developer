@@ -1,7 +1,7 @@
 import asyncio
 from logging.config import fileConfig
 
-from sqlalchemy import Connection  # engine_from_config
+from sqlalchemy.engine import Connection  # engine_from_config
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlalchemy import pool
 
@@ -50,7 +50,7 @@ async def run_async_migrations():
 
 
 def run_migrations_online() -> None:
-    asyncio.run(run_async_migrations)
+    asyncio.run(run_async_migrations())
 
 
 if context.is_offline_mode():
