@@ -1,4 +1,3 @@
-# Define o comando run
 run:
 	@uvicorn workout_api.main:app --reload
 
@@ -7,3 +6,4 @@ create-migrations:
 
 run-migrations:
 	@PYTHONPATH=$PYTHONPATH:$(pwd) alembic upgrade head
+
