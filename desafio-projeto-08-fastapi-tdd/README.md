@@ -158,14 +158,44 @@ rm -r nome_da_pasta
 ### Poetry
 
 Instalando o Poetry:
-
+O Poetry é instalado para o usuário e deve ter a variável de ambiente adicionada ao path do Windows. Para instalar, abra o Power Shell como Admin.
 ```txt
 pip install poetry
 ```
 
+Caso a variável de ambiente do Poetry não seja adicionada automaticamente ao path, use o comando a seguir no Power Shell como Admin:
+
+```txt
+[System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";$env:USERPROFILE\AppData\Roaming\Python\Scripts", [System.EnvironmentVariableTarget]::User)
+```
+
+Para verificar se o poetry.exe está no diretório esperado use o comando a seguir. Ele deve retornar True.
+```txt
+Test-Path "$env:USERPROFILE\AppData\Roaming\Python\Scripts\poetry.exe"
+```
+
+Para verificar se o Poetry está sendo reconhecido pela como um comando no terminal, use o comando a seguir. Deve retornar a versão do Poetry instalada.
+```txt
+poetry --version
+```
+
 Colocando o Poetry para gerenciar o projeto:
 ```txt
-poetry config virtualenvs. in-project true
+poetry config virtualenvs.in-project true
+```
+O Poetry init vai fazer uma série de perguntas, como: nome do projeto, versão, se você quer instalar alguma dependência. Basta responder de acordo com a necessidade.
+```txt
+poetry init
+```
+
+Abrir o terminal do Poetry:
+```txt
+poetry shell
+```
+
+Instalar os pacotes informados no init no Poetry Shell:
+```txt
+poetry install
 ```
 
 Criando um novo projeto com poetry:
@@ -186,6 +216,14 @@ Remover uma dependência com Poetry:
 poetry remove nome_dependencia
 ```
 
+Lista de comandos do Poetry:
+```txt
+poetry config --list
+```
+
 # Referências
 
 GAUVÃO FILHO, Luciano. Como instalar Python em 2024 + Pyenv, PIP, VENV, PIPX e Poetry. YouTube. Disponível em: https://www.youtube.com/watch?v=9LYqtLuD7z4 Acesso em: 26-06-2024
+
+MARTINS, Daniel.Configurando um Ambiente de Desenvolvimento Python.ilegra.Disponível em: [https://ilegra.com/blog/configurando-um-ambiente-de-desenvolvimento-python/](https://ilegra.com/blog/configurando-um-ambiente-de-desenvolvimento-python/). Acessado em: 27-06-2024.
+
