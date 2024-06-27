@@ -401,4 +401,5 @@ FodyWeavers.xsd
 alembic.ini
 .venv_workout
 .venv/
+.python-version
 desafio-projeto-03-sistema-bancario-poo/.vscode/launch.json
